@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>나의 즐겨찾기 모음 | Bookmark Hub</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f2f5;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 90%;
+            max-width: 1000px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #2a6496;
+            margin-bottom: 30px;
+        }
+        h2 {
+            border-bottom: 2px solid #ccc;
+            padding-bottom: 5px;
+            margin-top: 30px;
+            color: #555;
+        }
+        ul {
+            list-style: none; /* 기본 불릿 제거 */
+            padding: 0;
+            display: flex; /* 가로로 나열하기 위해 flex 사용 */
+            flex-wrap: wrap; /* 창 크기가 줄어들면 줄 바꿈 */
+            gap: 15px; /* 항목 사이의 간격 */
+        }
+        ul li {
+            background-color: #e9ecef;
+            border-radius: 5px;
+            padding: 10px 15px;
+            transition: background-color 0.2s;
+            flex-grow: 1; /* 항목이 공간을 채우도록 확장 */
+            min-width: 200px; /* 최소 너비 설정 */
+        }
+        ul li:hover {
+            background-color: #d1d8e0;
+        }
+        ul li a {
+            text-decoration: none;
+            color: #007bff;
+            font-weight: bold;
+            display: block;
+        }
+        ul li a:hover {
+            text-decoration: underline;
+            color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>⭐ 즐겨찾기 사이트 모음 ⭐</h1>
+
+       
+        <section id="Market news">
+            <h2>시장뉴스 및 리포트</h2>
+            <ul>
+                <li><a href="https://mktnews.com" target="_blank">mktnews</a> -중국</li>
+                <li><a href="https://www.financialjuice.com" target="_blank">financialjuice</a> -미국</li>
+                <li><a href="https://thefly.com" target="_blank">theFly</a> -미국</li>
+                <li><a href="https://finance.yahoo.com" target="_blank">yahooFinancial</a> -미국</li>
+                <li><a href="https://kabutan.jp" target="_blank">かぶたん</a> -일본</li>
+                <li><a href="https://minkabu.jp" target="_blank">みんかぶ</a> -일본</li>
+                <li><a href="https://www.traders.co.jp" target="_blank">トレイダーズWEB</a> -일본</li>
+                <li><a href="https://shikiho.toyokeizai.net" target="_blank">会社四季報</a> -일본</li>
+                <li><a href="https://www.equity.co.kr" target="_blank">에퀴티리포트</a> -한국</li>
+                <li><a href="https://www.wisereport.co.kr" target="_blank">와이즈리포트</a> -한국</li>
+                <li><a href="https://www.38.co.kr" target="_blank">IPO38커뮤</a> -한국</li>
+                <li><a href="https://www.ipokiso.com" target="_blank">IPO라이프파트너</a> -일본</li>
+                <li><a href="https://ipokabu.net" target="_blank">IPO서민공모주</a> -일본</li>
+            </ul>
+        </section>
+
+        <section id="Market data">
+            <h2>시장데이타</h2>
+            <ul>
+                <li><a href="https://sekai-kabuka.com" target="_blank">시세종합1</a> -일본</li>
+                <li><a href="https://nikkei225jp.com" target="_blank">시세종합2</a> -일본</li>
+                <li><a href="https://jpx-jquants.com" target="_blank">일본거래소퀀트</a> -유료</li>
+                <li><a href="https://finance.yahoo.co.jp" target="_blank">일본야후증권</a> -특징주기록</li>
+                <li><a href="https://finance.naver.com" target="_blank">네이버증권</a> -특징주기록</li>
+                <li><a href="https://finviz.com" target="_blank">핀비즈</a> -미국</li>
+                <li><a href="https://tradingeconomics.com" target="_blank">TradingEcono</a> -미국</li>
+                <li><a href="https://www.kofiabond.or.kr" target="_blank">금투협채권자료</a> -한국</li>
+                <li><a href="https://data.krx.co.kr" target="_blank">거래소자료실</a> -한국</li>
+                <li><a href="https://www.sec.gov/edgar/search" target="_blank">기업공시0</a> -미국 에드가</li>
+                <li><a href="https://dart.fss.or.kr" target="_blank">기업공시1</a> -한국 금융감독원</li>
+                <li><a href="https://kind.krx.co.kr" target="_blank">기업공시2</a> -한국거래소</li>
+                <li><a href="https://www.release.tdnet.info" target="_blank">기업공시3</a> -도쿄거래소</li>
+                <li><a href="https://disclosure2.edinet-fsa.go.jp" target="_blank">기업공시4</a> -일본금융청</li>
+                <li><a href="https://indexes.nikkei.co.jp" target="_blank">니케이인덱스</a> -일본</li>
+                <li><a href="https://www.jpx.co.jp" target="_blank">일본거래소그룹</a> -일본</li>
+                <li><a href="https://www.hsi.com.hk/eng" target="_blank">항셍인덱스</a> -중국</li>
+            </ul>
+        </section>
+
+        <section id="Securities">
+            <h2>증권사</h2>
+            <ul>
+                <li><a href="http://www.bookook.co.kr" target="_blank">부국증권</a> -법인영업주력</li>
+                <li><a href="https://www.kiwoom.com" target="_blank">키움증권</a> -소매영업주력</li>
+                <li><a href="https://securities.miraeasset.com" target="_blank">미래증권</a> -대형증권사</li>
+            </ul>
+        </section>
+
+        <section id="Korean Media">
+            <h2>한국 언론사</h2>
+            <ul>
+                <li><a href="https://newspaper.kr" target="_blank">언론사 모음</a> -무료</li>
+                <li><a href="https://www.kinds.or.kr" target="_blank">한국언론재단</a> -무료</li>
+                <li><a href="https://www.newsandpost.com" target="_blank">뉴스앤포스트</a> -무료</li>
+                <li><a href="https://www.ibtomato.com" target="_blank">IB토마토</a> -유료</li>
+                <li><a href="https://www.businesspost.co.kr" target="_blank">비즈니스포스트</a> -무료</li>
+                <li><a href="https://hanmiilbo.kr" target="_blank">한미일보</a> -무료</li>
+                <li><a href="https://www.ilyoseoul.co.kr" target="_blank">일요서울</a> -무료</li>
+                <li><a href="https://www.mediawatch.kr" target="_blank">미디어워치</a> -무료</li>
+                <li><a href="https://www.pennmike.com" target="_blank">펜앤마이크</a> -무료</li>
+                <li><a href="https://www.asiatoday.co.kr" target="_blank">아시아투데이</a> -무료</li>
+                <li><a href="https://www.newdaily.co.kr" target="_blank">뉴데일리</a> -무료</li>
+                <li><a href="https://www.etoday.co.kr" target="_blank">이투데이</a> -무료</li>
+                <li><a href="https://www.imaeil.com" target="_blank">매일신문</a> -무료</li>
+                <li><a href="https://www.topdaily.kr" target="_blank">톱데일리</a> -무료</li>
+                <li><a href="https://www.factfinder.tv" target="_blank">팩트파인더</a> -무료</li>
+                <li><a href="https://www.ltn.kr" target="_blank">법률방송뉴스</a> -무료</li>
+                <li><a href="https://www.chosun.com" target="_blank">조선일보</a> -무료</li>
+                <li><a href="https://www.newspim.com" target="_blank">뉴스핌</a> -무료</li>
+                <li><a href="https://www.ypnewskorea.co.kr" target="_blank">와이피뉴스</a> -무료</li>
+                <li><a href="https://www.inssait.co.kr" target="_blank">인싸잇뉴스</a> -무료</li>
+                <li><a href="https://www.freezinenews.com" target="_blank">프리진뉴스</a> -무료</li>
+                <li><a href="https://www.freezine.co.kr" target="_blank">프리진뉴스경제</a> -무료</li>
+                <li><a href="https://www.asiatime.co.kr" target="_blank">아시아타임</a> -무료</li>
+                <li><a href="https://www.jayupress.com" target="_blank">자유일보</a> -무료</li>
+                <li><a href="https://news.einfomax.co.kr" target="_blank">연합인포맥스</a> -무료</li>
+                <li><a href="https://www.yna.co.kr" target="_blank">연합뉴스</a> -무료</li>
+                <li><a href="https://www.koreadaily.com" target="_blank">미주중앙일보</a> -무료</li>
+                <li><a href="https://www.truthdaily.co.kr" target="_blank">트루스데일리</a> -무료</li>
+                <li><a href="https://www.ddaily.co.kr" target="_blank">디지털데일리</a> -무료</li>
+                <li><a href="https://www.ilovepc.co.kr" target="_blank">PC사랑</a> -월간지</li>
+                <li><a href="https://www.systemclub.co.kr" target="_blank">지만원'시사평론</a> -무료</li>
+            </ul>
+        </section>
+
+        <section id="North America Media">
+            <h2>북미 언론사</h2>
+            <ul>
+                <li><a href="https://www.instapaper.com" target="_blank">Instapaper</a> -Save</li>
+                <li><a href="https://www.nytimes.com" target="_blank">New York Times</a> -유료+IPsave </li>
+                <li><a href="https://www.wsj.com" target="_blank">Wall Street Journal</a> -유료</li>
+                <li><a href="https://www.bloomberg.com" target="_blank">Bloomberg</a> -유료</li>
+                <li><a href="https://www.newsmax.com" target="_blank">NewsMax</a> -무료</li>
+                <li><a href="https://justthenews.com" target="_blank">Just the News</a> -무료</li>
+                <li><a href="https://www.breitbart.com" target="_blank">Breitbart</a> -무료</li>
+                <li><a href="https://www.theepochtimes.com" target="_blank">Epoch Times</a> -무료</li>
+                <li><a href="https://www.washingtontimes.com" target="_blank">Washington Times</a> -무료</li>
+                <li><a href="https://www.washingtonexaminer.com" target="_blank">Washington Examiner</a> -무료</li>
+                <li><a href="https://www.realclearpolitics.com" target="_blank">RealClearPolitics</a> -미국정치</li>
+                <li><a href="https://www.270towin.com" target="_blank">270towin</a> -미국정치</li>
+            </ul>
+        </section>
+
+        <section id="Japan Media">
+            <h2>아시아 언론사</h2>
+            <ul>
+                <li><a href="https://newspicks.com" target="_blank">Newspicks</a> -주요뉴스</li>
+                <li><a href="https://www.sankei.com" target="_blank">産経新聞</a> -유료</li>
+                <li><a href="https://www.nikkan.co.jp" target="_blank">日刊工業新聞</a> -유료</li>
+                <li><a href="https://dempa-digital.com" target="_blank">電波新聞</a> -유료</li>
+                <li><a href="https://mainichi.jp" target="_blank">毎日新聞</a> -유료,구독</li>
+                <li><a href="https://www.asahi.com" target="_blank">朝日新聞</a> -유료</li>
+                <li><a href="https://www.yomiuri.co.jp" target="_blank">読売新聞</a> -유료</li>
+                <li><a href="https://www.nikkei.com" target="_blank">日本経済新</a> -유료</li>
+                <li><a href="https://toyokeizai.net" target="_blank">東洋経済新報</a> -유료,주간지</li>
+                <li><a href="https://www.digitimes.com" target="_blank">DigiTimes</a> -유료</li>
+            </ul>
+        </section>
+
+        <section id="Middle East and Africa">
+            <h2>유럽,중동,아프리카 언론사</h2>
+            <ul>
+                <li><a href="https://www.arabnews.com" target="_blank">Arab News</a> -무료</li>
+                <li><a href="https://www.jpost.com" target="_blank">The Jerusalem Post</a> -무료</li>
+                <li><a href="https://www.ft.com" target="_blank">Financial Times</a> -유료</li>
+                <li><a href="https://www.telegraph.co.uk" target="_blank">The telegraph</a> -유료</li>
+                <li><a href="https://www.thetimes.com" target="_blank">The times</a> -유료</li>
+                <li><a href="https://news.sky.com" target="_blank">SKY news</a> -무료</li>
+                <li><a href="https://www.intellinews.com" target="_blank">Intellinews</a> -무료</li>
+            </ul>
+        </section>
+
+        <section id="Social media">
+            <h2>소셜언론미디어</h2>
+            <ul>
+                <li><a href="https://hatena.blog" target="_blank">Hatena</a> -Blog</li>
+                <li><a href="https://note.com" target="_blank">Note+</a> -Blog</li>
+                <li><a href="https://www.livedoor.com" target="_blank">Livedoor</a> -News,Blog</li>
+                <li><a href="https://truthsocial.com" target="_blank">Truth Social</a> -Blog</li>
+                <li><a href="https://bsky.app" target="_blank">BlueSky</a> -Blog</li>
+                <li><a href="https://x.com" target="_blank">X.com</a> -Blog</li>
+                <li><a href="https://www.reddit.com" target="_blank">Reddit</a> -Blog</li>
+        </section>
+
+        <section id="News Words">
+            <h2>뉴스검색</h2>
+            <ul>
+                <li><a href="https://news.google.com/search?q=%EB%B3%84%EC%84%B8&hl=ko&gl=KR&ceid=KR%3Ako" target="_blank">부고</a> -구글뉴스</li>
+                <li><a href="https://news.google.com/search?q=%EB%B6%80%EA%B3%A0&hl=ko&gl=KR&ceid=KR%3Ako" target="_blank">별세</a> -구글뉴스</li>
+        </section>
+
+        <section id="Statistics">
+            <h2>통계정보</h2>
+            <ul>
+                <li><a href="https://kosis.kr" target="_blank">한국통계종합</a> -정부자료통합</li>
+                <li><a href="https://ecos.bok.or.kr" target="_blank">한국은행통계</a> -경제통계</li>
+                <li><a href="https://fisis.fss.or.kr" target="_blank">금융통계정보</a> -금융회사현황</li>
+                <li><a href="https://tradedata.go.kr" target="_blank">수출입무역통계</a> -관세청</li>
+                <li><a href="https://www.itstat.go.kr" target="_blank">정보통신통계</a> -정보통신정책연구원</li>
+                <li><a href="https://fred.stlouisfed.org" target="_blank">FRED</a> -FRB of ST.Louis</li>
+                <li><a href="https://www.e-stat.go.jp" target="_blank">s-STAT</a> -日本政府統計ポータル</li>
+                <li><a href="https://www.stat.go.jp" target="_blank">총무성 통계국</a> -일본정부</li>
+        </section>
+
+    </div>
+
+</body>
+</html>
+
+
