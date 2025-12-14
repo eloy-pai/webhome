@@ -1,289 +1,558 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>나의 즐겨찾기 모음 | Bookmark Hub</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f0f2f5;
-            color: #333;
-            margin: 0;
-            padding: 0;
-        }
-        .container {
-            width: 90%;
-            max-width: 1000px;
-            margin: 20px auto;
-            padding: 20px;
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        }
-        h1 {
-            text-align: center;
-            color: #2a6496;
-            margin-bottom: 30px;
-        }
-        h2 {
-            border-bottom: 2px solid #ccc;
-            padding-bottom: 5px;
-            margin-top: 30px;
-            color: #555;
-        }
-        ul {
-            list-style: none; /* 기본 불릿 제거 */
-            padding: 0;
-            display: flex; /* 가로로 나열하기 위해 flex 사용 */
-            flex-wrap: wrap; /* 창 크기가 줄어들면 줄 바꿈 */
-            gap: 15px; /* 항목 사이의 간격 */
-        }
-        ul li {
-            background-color: #e9ecef;
-            border-radius: 5px;
-            padding: 10px 15px;
-            transition: background-color 0.2s;
-            flex-grow: 1; /* 항목이 공간을 채우도록 확장 */
-            min-width: 200px; /* 최소 너비 설정 */
-        }
-        ul li:hover {
-            background-color: #d1d8e0;
-        }
-        ul li a {
-            text-decoration: none;
-            color: #007bff;
-            font-weight: bold;
-            display: block;
-        }
-        ul li a:hover {
-            text-decoration: underline;
-            color: #0056b3;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <title>링크 모음 페이지</title>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      margin: 40px;
+      background-color: #f5f5f5;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .section {
+      background-color: #ffffff;
+      border-radius: 8px;
+      padding: 20px 24px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+    }
+
+    .button-row {
+      margin-top: 10px;
+    }
+
+    .link-button {
+      display: inline-block;
+      padding: 10px 18px;
+      margin: 4px 6px 4px 0;
+      background-color: #d3d3d3; /* 연한 회색 (LightGray) */
+      color: #000000;            /* 검은색 텍스트 */
+      font-weight: 700;          /* 굵은 폰트(볼드) */
+      border-radius: 4px;
+      font-size: 14px;
+      transition: background-color 0.15s ease-in-out;
+    }
+
+    .link-button:hover {
+      background-color: #b0b0b0; /* 살짝 더 진한 회색 */
+    }
+  </style>
 </head>
 <body>
 
-    <div class="container">
-        <h1>⭐ 즐겨찾기 사이트 모음 ⭐</h1>
-
-       
-        <section id="Market news">
-            <h2>시장뉴스</h2>
-            <ul>
-                <li><a href="https://www.instapaper.com" target="_blank">인스타페이퍼</a>뉴스저장</li>
-                <li><a href="https://mktnews.com" target="_blank">mktnews</a>시장속보</li>
-                <li><a href="https://www.financialjuice.com" target="_blank">financialjuice</a>시장속보</li>
-                <li><a href="https://thefly.com" target="_blank">theFly</a>시장속보</li>
-                <li><a href="https://finance.yahoo.com" target="_blank">yahooFinancial</a>시장뉴스</li>
-                <li><a href="https://kabutan.jp" target="_blank">かぶたん</a>시장뉴스</li>
-                <li><a href="https://minkabu.jp" target="_blank">みんかぶ</a>시장뉴스</li>
-                <li><a href="https://www.traders.co.jp" target="_blank">トレイダーズWEB</a>시장정보</li>
-                <li><a href="https://shikiho.toyokeizai.net" target="_blank">会社四季報</a>시장뉴스</li>
-                <li><a href="https://www.equity.co.kr" target="_blank">에퀴티리포트</a></li>
-                <li><a href="https://www.wisereport.co.kr" target="_blank">와이즈리포트</a></li>
-                <li><a href="https://www.38.co.kr" target="_blank">38커뮤케이션</a>신규공모</li>
-                <li><a href="https://www.ipokiso.com" target="_blank">やさしいIPO</a>신규공모</li>
-                <li><a href="https://ipokabu.net" target="_blank">庶民のIPO</a>신규공모</li>
-            </ul>
-        </section>
-
-        <section id="Market data">
-            <h2>시장자료</h2>
-            <ul>
-                <li><a href="https://sekai-kabuka.com" target="_blank">世界の株価1</a>시장동향</li>
-                <li><a href="https://nikkei225jp.com" target="_blank">世界の株価2</a>시장동향</li>
-                <li><a href="https://finviz.com" target="_blank">Finviz</a>시장동향</li>
-                <li><a href="https://jpx-jquants.com" target="_blank">JPX-Quant</a>시장자료</li>
-                <li><a href="https://indexes.nikkei.co.jp" target="_blank">日経の指数公式</a>시장자료</li>
-                <li><a href="https://www.hsi.com.hk/eng" target="_blank">HK-HSI</a>시장자료</li>
-                <li><a href="https://tradingeconomics.com" target="_blank">T-Economics</a>시장자료</li>
-                <li><a href="https://www.kofiabond.or.kr" target="_blank">금투협채권시세</a>시장자료</li>
-                <li><a href="https://data.krx.co.kr" target="_blank">KRX시장자료</a></li>
-                <li><a href="https://www.sec.gov/edgar/search" target="_blank">EDGAR</a>시장공시</li>
-                <li><a href="https://dart.fss.or.kr" target="_blank">DART금감원</a>시장공시</li>
-                <li><a href="https://kind.krx.co.kr" target="_blank">KRX-KIND</a>시장공시</li>
-                <li><a href="https://www.release.tdnet.info" target="_blank">開示情報閲覧</a>기업공시</li>
-                <li><a href="https://disclosure2.edinet-fsa.go.jp" target="_blank">金融庁EDINET</a>기업공시</li>
-                <li><a href="https://www.jpx.co.jp" target="_blank">日本取引所</a></li>
-            </ul>
-        </section>
-
-        <section id="Securities">
-            <h2>증권사</h2>
-            <ul>
-                <li><a href="http://www.bookook.co.kr" target="_blank">부국증권</a></li>
-                <li><a href="https://www.kiwoom.com" target="_blank">키움증권</a></li>
-                <li><a href="https://securities.miraeasset.com" target="_blank">미래에셋증권</a></li>
-            </ul>
-        </section>
-
-        <section id="Korean Media">
-            <h2>한국 옛언론</h2>
-            <ul>
-                <li><a href="https://www.mk.co.kr" target="_blank">매일경제</a>장대환</li>
-                <li><a href="https://www.hankyung.com" target="_blank">한국경제</a>기업단체</li>
-                <li><a href="https://www.mt.co.kr" target="_blank">머니투데이</a>홍선근</li>
-                <li><a href="https://www.sedaily.com" target="_blank">서울경제</a>장재민</li>
-                <li><a href="https://www.etoday.co.kr" target="_blank">이투데이</a></li>
-                <li><a href="https://www.newspim.com" target="_blank">뉴스핌</a></li>
-                <li><a href="https://www.edaily.co.kr" target="_blank">이데일리</a>KG그룹</li>
-                <li><a href="https://www.nspna.com" target="_blank">NSP통신</a></li>
-                <li><a href="https://www.topdaily.kr" target="_blank">톱데일리</a></li>
-                <li><a href="https://www.munhwa.com" target="_blank">문화일보</a>현대중공업그룹</li>
-                <li><a href="https://www.seoul.co.kr" target="_blank">서울신문</a>호반건설그룹</li>
-                <li><a href="https://www.segye.com" target="_blank">세계일보</a>통일교</li>
-                <li><a href="https://www.kmib.co.kr" target="_blank">국민일보</a>순복음교회</li>
-                <li><a href="https://www.newdaily.co.kr" target="_blank">뉴데일리</a>인보길</li>
-                <li><a href="https://www.imaeil.com" target="_blank">매일신문</a>코리아와이드,대구</li>
-                <li><a href="https://www.yeongnam.com" target="_blank">영남일보</a>동양종합건설,대구</li>
-                <li><a href="https://www.koreadaily.com" target="_blank">미주중앙일보</a></li>
-                <li><a href="https://newspaper.kr" target="_blank">언론사모음</a></li>
-                <li><a href="https://www.kinds.or.kr" target="_blank">언론재단</a>과거기사검색</li>
-            </ul>
-        </section>
-
-        <section id="Korean Media2">
-            <h2>한국 대안언론</h2>
-            <ul>
-                <li><a href="https://www.ltn.kr" target="_blank">법률방송뉴스</a></li>
-                <li><a href="https://www.mediawatch.kr" target="_blank">미디어워치</a>변희재</li>
-                <li><a href="https://www.ypnewskorea.co.kr" target="_blank">와이피뉴스</a>이영풍</li>
-                <li><a href="https://www.inssait.co.kr" target="_blank">인싸잇뉴스</a>강용석</li>
-                <li><a href="https://www.freezinenews.com" target="_blank">프리진뉴스</a>조문기</li>
-                <li><a href="https://www.hanmiilbo.kr" target="_blank">한미일보</a></li>
-                <li><a href="https://www.pennmike.com" target="_blank">펜앤마이크</a></li>
-            </ul>
-        </section>
-
-        <section id="Korean Media3">
-            <h2>한국 대안매체</h2>
-            <ul>
-                <li><a href="https://www.youtube.com/@%EC%9B%90%EC%9A%A9%EC%84%9D%EC%9D%98%EC%A7%84%EC%8B%A4%EC%A0%95%EC%B9%98" target="_blank">원용석</a>미국</li>
-                <li><a href="https://www.youtube.com/@groundc" target="_blank">김성원</a></li>
-                <li><a href="https://www.youtube.com/@%EA%B3%A0%EC%84%B1%EA%B5%ADTV" target="_blank">고성국</a></li>
-                <li><a href="https://www.youtube.com/@TV-xg4ke" target="_blank">전원책</a>변호사</li>
-                <li><a href="https://www.youtube.com/@chung-bubjeon" target="_blank">정혁진</a>변호사</li>
-                <li><a href="https://www.youtube.com/@%EB%A9%B8%EC%BD%A9TV" target="_blank">장예찬</a></li>
-                <li><a href="https://www.youtube.com/@RedOUTT" target="_blank">젊은시각</a></li>
-            </ul>
-        </section>
-
-        <section id="North America Media">
-            <h2>북미 언론</h2>
-            <ul>
-                <li><a href="https://www.nytimes.com" target="_blank">New York Times</a></li>
-                <li><a href="https://www.washingtonpost.com" target="_blank">Washington Post</a>Jeff Bezos</li>
-                <li><a href="https://www.wsj.com" target="_blank">Wall Street Journal</a></li>
-                <li><a href="https://www.bloomberg.com" target="_blank">Bloomberg</a></li>
-                <li><a href="https://www.foxnews.com" target="_blank">FOX News</a></li>
-                <li><a href="https://www.newsmax.com" target="_blank">NewsMax</a></li>
-                <li><a href="https://justthenews.com" target="_blank">JustTheNews</a></li>
-                <li><a href="https://www.breitbart.com" target="_blank">Breitbart</a></li>
-                <li><a href="https://www.theepochtimes.com" target="_blank">Epoch Times</a></li>
-                <li><a href="https://www.washingtontimes.com" target="_blank">Washington Times</a></li>
-                <li><a href="https://www.washingtonexaminer.com" target="_blank">Washington Examiner</a></li>
-            </ul>
-        </section>
-
-        <section id="North America Media2">
-            <h2>북미 럼블,대안언론</h2>
-            <ul>
-                <li><a href="https://www.realclearpolitics.com" target="_blank">RealClearPolitics</a></li>
-                <li><a href="https://www.270towin.com" target="_blank">270towin</a>선거결과</li>
-                <li><a href="https://rumble.com/c/TuckerCarlson" target="_blank">TuckerCarlson</a>Rumble</li>
-                <li><a href="https://rumble.com/c/TuckerCarlsonNetwork" target="_blank">TuckerCarlsonNetwork</a>Rumble</li>
-                <li><a href="https://rumble.com/c/TUCKERCARLSONNEWS" target="_blank">TuckerCarlsonNews</a>Rumble</li>
-                <li><a href="https://rumble.com/c/LauraLoomer" target="_blank">LauraLoomer</a>Rumble</li>
-                <li><a href="https://rumble.com/c/MegynKelly" target="_blank">MegynKelly1</a>Rumble</li>
-                <li><a href="https://rumble.com/c/BannonsWarRoom" target="_blank">WarRoom</a> -Rumble</li>
-            </ul>
-        </section>
 
 
-        <section id="Japan Media">
-            <h2>아시아 언론</h2>
-            <ul>
-                <li><a href="https://newspicks.com" target="_blank">Newspicks</a></li>
-                <li><a href="https://www.sankei.com" target="_blank">産経新聞</a></li>
-                <li><a href="https://mainichi.jp" target="_blank">毎日新聞</a></li>
-                <li><a href="https://www.asahi.com" target="_blank">朝日新聞</a></li>
-                <li><a href="https://www.yomiuri.co.jp" target="_blank">読売新聞</a></li>
-                <li><a href="https://www.nikkei.com" target="_blank">日本経済新</a></li>
-                <li><a href="https://toyokeizai.net" target="_blank">東洋経済新報</a></li>
-                <li><a href="https://www.nikkan.co.jp" target="_blank">日刊工業新聞</a></li>
-                <li><a href="https://dempa-digital.com" target="_blank">電波新聞</a></li>
-                <li><a href="https://www.digitimes.com" target="_blank">DigiTimes</a>대만</li>
-                <li><a href="https://www.ltn.com.tw" target="_blank">自由時報</a>대만</li>
-                <li><a href="https://www.taipeitimes.com" target="_blank">TaipeiTimes</a>대만</li>
-                <li><a href="https://www.scmp.com" target="_blank">SCMPost</a>홍콩</li>
-                <li><a href="https://www.straitstimes.com" target="_blank">StraitsTimes</a>싱가폴</li>
-                <li><a href="https://www.channelnewsasia.com" target="_blank">CNA news</a>싱가폴</li>
-            </ul>
-        </section>
+<!-- TradingView Widget BEGIN -->
+<div class="tradingview-widget-container">
+  <div class="tradingview-widget-container__widget"></div>
+  <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/markets/" rel="noopener nofollow" target="_blank"><span class="blue-text">Markets today</span></a><span class="trademark"> by TradingView</span></div>
+  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-tickers.js" async>
+  {
+  "symbols": [
+    {
+      "proName": "FX:EURUSD",
+      "title": "EUR/USD"
+    },
+    {
+      "proName": "FX:USDJPY",
+      "title": "USD/JPY"
+    },
+    {
+      "proName": "COINBASE:BTCUSD",
+      "title": "BTC/USD"
+    },
+    {
+      "proName": "AMEX:GLD",
+      "title": "Gold"
+    },
+    {
+      "proName": "AMEX:USO",
+      "title": "WTI Fut"
+    }
+  ],
+  "colorTheme": "light",
+  "locale": "en",
+  "largeChartUrl": "",
+  "isTransparent": false,
+  "showSymbolLogo": true
+}
+  </script>
+</div>
+<!-- TradingView Widget END -->
 
-        <section id="Middle East and Africa">
-            <h2>유럽,중동,아프리카 언론</h2>
-            <ul>
-                <li><a href="https://www.arabnews.com" target="_blank">Arab News</a>사우디아라비아</li>
-                <li><a href="https://www.jpost.com" target="_blank">The Jerusalem Post</a>이스라엘</li>
-                <li><a href="https://www.ft.com" target="_blank">Financial Times</a>영국</li>
-                <li><a href="https://www.telegraph.co.uk" target="_blank">The telegraph</a>영국</li>
-                <li><a href="https://www.thetimes.com" target="_blank">The times</a>영국</li>
-                <li><a href="https://news.sky.com" target="_blank">SKY News</a>영국</li>
-                <li><a href="https://www.dw.com" target="_blank">Deutsche Welle</a>독일</li>
-                <li><a href="https://www.france24.com" target="_blank">France24</a>프랑스</li>
-            </ul>
-        </section>
 
-        <section id="Social media">
-            <h2>소셜미디어,블로그</h2>
-            <ul>
-                <li><a href="https://hatena.blog" target="_blank">Hatena</a> -Blog</li>
-                <li><a href="https://note.com" target="_blank">Note+</a> -Blog</li>
-                <li><a href="https://www.livedoor.com" target="_blank">Livedoor</a> -News,Blog</li>
-                <li><a href="https://truthsocial.com" target="_blank">Truth Social</a> -Blog</li>
-                <li><a href="https://bsky.app" target="_blank">BlueSky</a> -Blog</li>
-                <li><a href="https://x.com" target="_blank">X.com</a> -Blog</li>
-                <li><a href="https://www.reddit.com" target="_blank">Reddit</a> -Blog</li>
-                <li><a href="https://michaeljburry.substack.com" target="_blank">MichaelJBurry</a> -Blog Substack</li>
-        </section>
 
-        <section id="News Words">
-            <h2>인터넷 검색</h2>
-            <ul>
-                <li><a href="https://duckduckgo.com" target="_blank">DuckDuckGo</a> -인터넷 검색</li>
-                <li><a href="https://brave.com/search" target="_blank">Brave Search</a> -인터넷 검색</li>
-                <li><a href="https://yandex.com" target="_blank">Yandex</a> -러시아 검색</li>
-                <li><a href="https://news.google.com/search?q=%EB%B3%84%EC%84%B8&hl=ko&gl=KR&ceid=KR%3Ako" target="_blank">부고</a> -구글뉴스</li>
-        </section>
 
-        <section id="Statistics">
-            <h2>통계정보</h2>
-            <ul>
-                <li><a href="https://kosis.kr" target="_blank">한국통계종합</a> -정부자료통합</li>
-                <li><a href="https://ecos.bok.or.kr" target="_blank">한국은행통계</a> -경제통계</li>
-                <li><a href="https://fisis.fss.or.kr" target="_blank">금융통계정보</a> -금융회사현황</li>
-                <li><a href="https://tradedata.go.kr" target="_blank">수출입무역통계</a> -관세청</li>
-                <li><a href="https://www.itstat.go.kr" target="_blank">정보통신통계</a> -정보통신정책연구원</li>
-                <li><a href="https://tasis.nts.go.kr" target="_blank">국세통계</a> -국세청</li>
-                <li><a href="https://fred.stlouisfed.org" target="_blank">美FRED</a> -FRB of ST.Louis</li>
-                <li><a href="https://www.e-stat.go.jp" target="_blank">日e-STAT</a> -日本政府統計ポータル</li>
-                <li><a href="https://www.stat.go.jp" target="_blank">日총무성 통계국</a> -일본정부</li>
-        </section>
+<!-- TradingView Widget BEGIN -->
+<div class="tradingview-widget-container">
+  <div class="tradingview-widget-container__widget"></div>
+  <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/markets/" rel="noopener nofollow" target="_blank"><span class="blue-text">Markets today</span></a><span class="trademark"> by TradingView</span></div>
+  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-tickers.js" async>
+  {
+  "symbols": [
+    {
+      "proName": "NASDAQ:IXIC",
+      "title": "NASDAQ"
+    },
+    {
+      "proName": "NASDAQ:SOX",
+      "title": "PHLX"
+    },
+    {
+      "proName": "AMEX:SPY",
+      "title": "SP500"
+    },
+    {
+      "proName": "AMEX:IWM",
+      "title": "Russell2000"
+    },
+    {
+      "proName": "AMEX:DIA",
+      "title": "Dow30"
+    }
+  ],
+  "colorTheme": "light",
+  "locale": "en",
+  "largeChartUrl": "",
+  "isTransparent": false,
+  "showSymbolLogo": true
+}
+  </script>
+</div>
+<!-- TradingView Widget END -->
 
-        <section id="Industry Organization">
-            <h2>산업별 단체</h2>
-            <ul>
-                <li><a href="https://www.jfa-fc.or.jp" target="_blank">日本フランチャイズチェーン協会</a> -일본</li>
-                <li><a href="https://www.super.or.jp" target="_blank">日本全国スーパーマーケット協会</a> -일본</li>
-                <li><a href="https://www.jada.or.jp" target="_blank">日本自動車販売協会</a> -일본</li>
-                <li><a href="https://www.jetro.go.jp" target="_blank">日本貿易振興機構</a> -일본</li>
-        </section>
 
+
+
+  <h1>참고자료</h1>
+
+  <!-- 1. 시장자료 링크 -->
+  <div class="section">
+    <h2>시장자료</h2>
+
+    <div class="button-row">
+      <!-- 버튼 형태의 링크 (새 탭에서 열림) -->
+  <a class="link-button" href="https://mktnews.com" target="_blank" rel="noopener noreferrer">
+    Mktnews
+  </a>
+  <a class="link-button" href="https://www.financialjuice.com" target="_blank" rel="noopener noreferrer">
+    Financialjuice
+  </a>
+  <a class="link-button" href="https://thefly.com" target="_blank" rel="noopener noreferrer">
+    The Fly
+  </a>
+  <a class="link-button" href="https://finance.yahoo.com" target="_blank" rel="noopener noreferrer">
+    yahooFinancial
+  </a>
+  <a class="link-button" href="https://kabutan.jp" target="_blank" rel="noopener noreferrer">
+    かぶたん
+  </a>
+  <a class="link-button" href="https://minkabu.jp" target="_blank" rel="noopener noreferrer">
+    みんかぶ
+  </a>
+  <a class="link-button" href="https://www.traders.co.jp" target="_blank" rel="noopener noreferrer">
+    トレイダーズWEB
+  </a>
+  <a class="link-button" href="https://shikiho.toyokeizai.net" target="_blank" rel="noopener noreferrer">
+    会社四季報
+  </a>
+  <a class="link-button" href="https://www.equity.co.kr" target="_blank" rel="noopener noreferrer">
+    에퀴티리포트
+  </a>
+  <a class="link-button" href="https://www.wisereport.co.kr" target="_blank" rel="noopener noreferrer">
+    와이즈리포트
+  </a>
+  <a class="link-button" href="https://www.38.co.kr" target="_blank" rel="noopener noreferrer">
+    38커뮤IPO
+  </a>
+  <a class="link-button" href="https://www.ipokiso.com" target="_blank" rel="noopener noreferrer">
+    やさしいIPO
+  </a>
+  <a class="link-button" href="https://ipokabu.net" target="_blank" rel="noopener noreferrer">
+    庶民のIPO
+  </a>
+  <a class="link-button" href="https://sekai-kabuka.com" target="_blank" rel="noopener noreferrer">
+    世界の株価
+  </a>
+  <a class="link-button" href="https://nikkei225jp.com" target="_blank" rel="noopener noreferrer">
+    NIKKEI225株価
+  </a>
+  <a class="link-button" href="https://finviz.com" target="_blank" rel="noopener noreferrer">
+    Finviz Market
+  </a>
+  <a class="link-button" href="https://jpx-jquants.com" target="_blank" rel="noopener noreferrer">
+    JPX-Quant
+  </a>
+  <a class="link-button" href="https://indexes.nikkei.co.jp" target="_blank" rel="noopener noreferrer">
+    日経の指数公式
+  </a>
+  <a class="link-button" href="https://www.hsi.com.hk/eng" target="_blank" rel="noopener noreferrer">
+    HK_HangSeng
+  </a>
+  <a class="link-button" href="https://tradingeconomics.com" target="_blank" rel="noopener noreferrer">
+    Trading_Econo
+  </a>
+  <a class="link-button" href="https://www.kofiabond.or.kr" target="_blank" rel="noopener noreferrer">
+    금투협채권시장
+  </a>
+  <a class="link-button" href="https://data.krx.co.kr" target="_blank" rel="noopener noreferrer">
+    KRX시장자료
+  </a>
+  <a class="link-button" href="https://www.sec.gov/edgar/search" target="_blank" rel="noopener noreferrer">
+    EDGAR공시
+  </a>
+  <a class="link-button" href="https://dart.fss.or.kr" target="_blank" rel="noopener noreferrer">
+    DART금감원공시
+  </a>
+  <a class="link-button" href="https://kind.krx.co.kr" target="_blank" rel="noopener noreferrer">
+    KRX_KIND공시
+  </a>
+  <a class="link-button" href="https://www.release.tdnet.info" target="_blank" rel="noopener noreferrer">
+    開示情報閲覧공시
+  </a>
+  <a class="link-button" href="https://disclosure2.edinet-fsa.go.jp" target="_blank" rel="noopener noreferrer">
+    金融庁EDINET공시
+  </a>
+  <a class="link-button" href="https://www.jpx.co.jp" target="_blank" rel="noopener noreferrer">
+    日本取引所
+  </a>
+  <a class="link-button" href="http://www.bookook.co.kr" target="_blank" rel="noopener noreferrer">
+    부국증권
+  </a>
+  <a class="link-button" href="https://www.kiwoom.com" target="_blank" rel="noopener noreferrer">
+    키움증권
+  </a>
+  <a class="link-button" href="https://securities.miraeasset.com" target="_blank" rel="noopener noreferrer">
+    미래에셋증권
+  </a>
     </div>
+
+  </div>
+
+  <!-- 2. 옛언론사 링크 -->
+  <div class="section">
+    <h2>옛언론사</h2>
+
+    <div class="button-row">
+  <a class="link-button" href="https://www.instapaper.com" target="_blank" rel="noopener noreferrer">Instapaper※
+  <a class="link-button" href="https://news.google.com" target="_blank" rel="noopener noreferrer">구글뉴스모음
+  <a class="link-button" href="https://news.naver.com" target="_blank" rel="noopener noreferrer">네이버뉴스모음
+  </a>
+  <a class="link-button" href="https://www.mk.co.kr" target="_blank" rel="noopener noreferrer">
+    매일경제
+  </a>
+  <a class="link-button" href="https://www.hankyung.com" target="_blank" rel="noopener noreferrer">
+    한국경제
+  </a>
+  <a class="link-button" href="https://www.mt.co.kr" target="_blank" rel="noopener noreferrer">
+    머니투데이
+  </a>
+  <a class="link-button" href="https://www.sedaily.com" target="_blank" rel="noopener noreferrer">
+    서울경제
+  </a>
+  <a class="link-button" href="https://www.etoday.co.kr" target="_blank" rel="noopener noreferrer">
+    이투데이
+  </a>
+  <a class="link-button" href="https://www.newspim.com" target="_blank" rel="noopener noreferrer">
+    뉴스핌
+  </a>
+  <a class="link-button" href="https://www.edaily.co.kr" target="_blank" rel="noopener noreferrer">
+    이데일리_KG그룹
+  </a>
+  <a class="link-button" href="https://www.nspna.com" target="_blank" rel="noopener noreferrer">
+    NSP통신
+  </a>
+  <a class="link-button" href="https://www.topdaily.kr" target="_blank" rel="noopener noreferrer">
+    톱데일리
+  </a>
+  <a class="link-button" href="https://www.munhwa.com" target="_blank" rel="noopener noreferrer">
+    문화일보_현대중공업그룹
+  </a>
+  <a class="link-button" href="https://www.seoul.co.kr" target="_blank" rel="noopener noreferrer">
+    서울신문_호반건설그룹
+  </a>
+  <a class="link-button" href="https://www.segye.com" target="_blank" rel="noopener noreferrer">
+    세계일보_통일교
+  </a>
+  <a class="link-button" href="https://www.kmib.co.kr" target="_blank" rel="noopener noreferrer">
+    국민일보_순복음교회
+  </a>
+  <a class="link-button" href="https://www.newdaily.co.kr" target="_blank" rel="noopener noreferrer">
+    뉴데일리
+  </a>
+  <a class="link-button" href="https://www.imaeil.com" target="_blank" rel="noopener noreferrer">
+    매일신문_코리아와이드
+  </a>
+  <a class="link-button" href="https://www.yeongnam.com" target="_blank" rel="noopener noreferrer">
+    영남일보_동양종합건설
+  </a>
+  <a class="link-button" href="https://www.koreadaily.com" target="_blank" rel="noopener noreferrer">
+    미주중앙일보
+  </a>
+  <a class="link-button" href="https://www.ltn.kr" target="_blank" rel="noopener noreferrer">
+    법률방송뉴스
+  </a>
+  <a class="link-button" href="https://www.mediawatch.kr" target="_blank" rel="noopener noreferrer">
+    미디어워치
+  </a>
+  <a class="link-button" href="https://www.ypnewskorea.co.kr" target="_blank" rel="noopener noreferrer">
+    와이피뉴스
+  </a>
+  <a class="link-button" href="https://www.inssait.co.kr" target="_blank" rel="noopener noreferrer">
+    인싸잇뉴스
+  </a>
+  <a class="link-button" href="https://www.freezinenews.com" target="_blank" rel="noopener noreferrer">
+    프리진뉴스
+  </a>
+  <a class="link-button" href="https://www.hanmiilbo.kr" target="_blank" rel="noopener noreferrer">
+    한미일보
+  </a>
+  <a class="link-button" href="https://www.pennmike.com" target="_blank" rel="noopener noreferrer">
+    펜앤마이크
+  </a>
+  <a class="link-button" href="https://www.nytimes.com" target="_blank" rel="noopener noreferrer">
+    NewYork Times
+  </a>
+  <a class="link-button" href="https://www.washingtonpost.com" target="_blank" rel="noopener noreferrer">
+    WashingtonPost
+  </a>
+  <a class="link-button" href="https://www.wsj.com" target="_blank" rel="noopener noreferrer">
+    WallStreet Journal
+  </a>
+  <a class="link-button" href="https://www.foxnews.com" target="_blank" rel="noopener noreferrer">
+    FOX News
+  </a>
+  <a class="link-button" href="https://www.newsmax.com" target="_blank" rel="noopener noreferrer">
+    NewsMax
+  </a>
+  <a class="link-button" href="https://justthenews.com" target="_blank" rel="noopener noreferrer">
+    JustTheNews
+  </a>
+  <a class="link-button" href="https://www.breitbart.com" target="_blank" rel="noopener noreferrer">
+    Breitbart
+  </a>
+  <a class="link-button" href="https://www.theepochtimes.com" target="_blank" rel="noopener noreferrer">
+    EpochTimes
+  </a>
+  <a class="link-button" href="https://www.washingtontimes.com" target="_blank" rel="noopener noreferrer">
+    WashingtonTimes
+  </a>
+  <a class="link-button" href="https://www.washingtonexaminer.com" target="_blank" rel="noopener noreferrer">
+    WashingtonExam
+  </a>
+  <a class="link-button" href="https://www.sankei.com" target="_blank" rel="noopener noreferrer">
+    産経新聞
+  </a>
+  <a class="link-button" href="https://mainichi.jp" target="_blank" rel="noopener noreferrer">
+    毎日新聞
+  </a>
+  <a class="link-button" href="https://www.asahi.com" target="_blank" rel="noopener noreferrer">
+    朝日新聞
+  </a>
+  <a class="link-button" href="https://www.yomiuri.co.jp" target="_blank" rel="noopener noreferrer">
+    読売新聞
+  </a>
+  <a class="link-button" href="https://www.nikkei.com" target="_blank" rel="noopener noreferrer">
+    日本経済新
+  </a>
+  <a class="link-button" href="https://toyokeizai.net" target="_blank" rel="noopener noreferrer">
+    東洋経済新報
+  </a>
+  <a class="link-button" href="https://www.nikkan.co.jp" target="_blank" rel="noopener noreferrer">
+    日刊工業新聞
+  </a>
+  <a class="link-button" href="https://dempa-digital.com" target="_blank" rel="noopener noreferrer">
+    電波新聞
+  </a>
+  <a class="link-button" href="https://www.digitimes.com" target="_blank" rel="noopener noreferrer">
+    DigiTimes台湾
+  </a>
+  <a class="link-button" href="https://www.ltn.com.tw" target="_blank" rel="noopener noreferrer">
+    自由時報台湾
+  </a>
+  <a class="link-button" href="https://www.taipeitimes.com" target="_blank" rel="noopener noreferrer">
+    TaipeiTimes台湾
+  </a>
+  <a class="link-button" href="https://www.scmp.com" target="_blank" rel="noopener noreferrer">
+    SCMPostHK
+  </a>
+  <a class="link-button" href="https://www.straitstimes.com" target="_blank" rel="noopener noreferrer">
+    StraitsTimesSG
+  </a>
+  <a class="link-button" href="https://www.channelnewsasia.com" target="_blank" rel="noopener noreferrer">
+    CNAnewsSG
+  </a>
+  <a class="link-button" href="https://www.arabnews.com" target="_blank" rel="noopener noreferrer">
+    ArabNewsKSA
+  </a>
+  <a class="link-button" href="https://www.jpost.com" target="_blank" rel="noopener noreferrer">
+    JerusalemPost
+  </a>
+  <a class="link-button" href="https://www.ft.com" target="_blank" rel="noopener noreferrer">
+    FinancialTimesGB
+  </a>
+  <a class="link-button" href="https://www.telegraph.co.uk" target="_blank" rel="noopener noreferrer">
+    TelegraphGB
+  </a>
+  <a class="link-button" href="https://www.thetimes.com" target="_blank" rel="noopener noreferrer">
+    ThetimesGB
+  </a>
+  <a class="link-button" href="https://news.sky.com" target="_blank" rel="noopener noreferrer">
+    SKYNewsGB
+  </a>
+  <a class="link-button" href="https://www.dw.com" target="_blank" rel="noopener noreferrer">
+    DeutscheWelle
+  </a>
+  <a class="link-button" href="https://www.france24.com" target="_blank" rel="noopener noreferrer">
+    France24
+  </a>
+    </div>
+  </div>
+
+  <!-- 3. 대안언론사 링크 -->
+  <div class="section">
+    <h2>대안언론</h2>
+
+    <div class="button-row">
+  <a class="link-button" href="https://rumble.com/c/TuckerCarlson" target="_blank" rel="noopener noreferrer">
+    TuckerCarlson_럼블
+  </a>
+  <a class="link-button" href="https://rumble.com/c/LauraLoomer" target="_blank" rel="noopener noreferrer">
+    LauraLoomer_럼블
+  </a>
+  <a class="link-button" href="https://rumble.com/c/MegynKelly" target="_blank" rel="noopener noreferrer">
+    MegynKelly_럼블
+  </a>
+  <a class="link-button" href="https://rumble.com/c/BannonsWarRoom" target="_blank" rel="noopener noreferrer">
+    WarRoom_럼블
+  </a>
+  <a class="link-button" href="https://www.youtube.com/@%EC%9B%90%EC%9A%A9%EC%84%9D%EC%9D%98%EC%A7%84%EC%8B%A4%EC%A0%95%EC%B9%98" target="_blank" rel="noopener noreferrer">
+    원용석_유튭
+  </a>
+  <a class="link-button" href="https://www.youtube.com/@groundc" target="_blank" rel="noopener noreferrer">
+    김성원_유튭
+  </a>
+  <a class="link-button" href="https://www.youtube.com/@%EA%B3%A0%EC%84%B1%EA%B5%ADTV" target="_blank" rel="noopener noreferrer">
+    고성국_유튭
+  </a>
+  <a class="link-button" href="https://www.youtube.com/@TV-xg4ke" target="_blank" rel="noopener noreferrer">
+    전원책_유튭
+  </a>
+  <a class="link-button" href="https://www.youtube.com/@chung-bubjeon" target="_blank" rel="noopener noreferrer">
+    정혁진_유튭
+  </a>
+  <a class="link-button" href="https://www.youtube.com/@%EB%A9%B8%EC%BD%A9TV" target="_blank" rel="noopener noreferrer">
+    장예찬_유튭
+  </a>
+  <a class="link-button" href="https://www.youtube.com/@RedOUTT" target="_blank" rel="noopener noreferrer">
+    젊은시각_유튭
+  </a>
+  <a class="link-button" href="https://www.youtube.com/@tv0505" target="_blank" rel="noopener noreferrer">
+    표영호_유튭
+  </a>
+  <a class="link-button" href="https://www.youtube.com/@doctorhwang7" target="_blank" rel="noopener noreferrer">
+    황규현_유튭
+  </a>
+  <a class="link-button" href="https://www.youtube.com/@HANMOONCHULTV" target="_blank" rel="noopener noreferrer">
+    한문철_유튭
+  </a>
+  <a class="link-button" href="https://www.youtube.com/@%EB%94%B8%EB%B0%B0%ED%97%8C%ED%84%B0" target="_blank" rel="noopener noreferrer">
+    딸배헌터_유튭
+  </a>
+  <a class="link-button" href="https://newspicks.com" target="_blank" rel="noopener noreferrer">
+    日Newspicks
+  </a>
+  <a class="link-button" href="https://hatena.blog" target="_blank" rel="noopener noreferrer">
+    HatenaBlog
+  </a>
+  <a class="link-button" href="https://note.com" target="_blank" rel="noopener noreferrer">
+    NoteBlog
+  </a>
+  <a class="link-button" href="https://www.livedoor.com" target="_blank" rel="noopener noreferrer">
+    LivedoorBlog
+  </a>
+  <a class="link-button" href="https://truthsocial.com" target="_blank" rel="noopener noreferrer">
+    TruthSocialBlog
+  </a>
+  <a class="link-button" href="https://bsky.app" target="_blank" rel="noopener noreferrer">
+    BlueSkyBlog
+  </a>
+  <a class="link-button" href="https://x.com" target="_blank" rel="noopener noreferrer">
+    X.comBlog
+  </a>
+  <a class="link-button" href="https://www.reddit.com" target="_blank" rel="noopener noreferrer">
+    RedditBlog
+  </a>
+  <a class="link-button" href="https://michaeljburry.substack.com" target="_blank" rel="noopener noreferrer">
+    MichaelBurry_Substack
+  </a>
+    </div>
+  </div>
+
+  <!-- 4. 참고자료 -->
+  <div class="section">
+    <h2>참고자료</h2>
+
+    <div class="button-row">
+  <a class="link-button" href="https://www.realclearpolitics.com" target="_blank" rel="noopener noreferrer">
+    RealClearPolitics
+  </a>
+  <a class="link-button" href="https://www.270towin.com" target="_blank" rel="noopener noreferrer">
+    270towin선거자료
+  </a>
+  <a class="link-button" href="https://newspaper.kr" target="_blank" rel="noopener noreferrer">
+    언론사모음
+  </a>
+  <a class="link-button" href="https://www.kinds.or.kr" target="_blank" rel="noopener noreferrer">
+    언론재단_기사검색
+  </a>
+  <a class="link-button" href="https://kosis.kr" target="_blank" rel="noopener noreferrer">
+    한국통계종합
+  </a>
+  <a class="link-button" href="https://ecos.bok.or.kr" target="_blank" rel="noopener noreferrer">
+    한국은행통계
+  </a>
+  <a class="link-button" href="https://fisis.fss.or.kr" target="_blank" rel="noopener noreferrer">
+    금융사통계
+  </a>
+  <a class="link-button" href="https://tradedata.go.kr" target="_blank" rel="noopener noreferrer">
+    관세청통계
+  </a>
+  <a class="link-button" href="https://www.itstat.go.kr" target="_blank" rel="noopener noreferrer">
+    정보통신통계
+  </a>
+  <a class="link-button" href="https://tasis.nts.go.kr" target="_blank" rel="noopener noreferrer">
+    국세청통계
+  </a>
+  <a class="link-button" href="https://fred.stlouisfed.org" target="_blank" rel="noopener noreferrer">
+    美FRED_STL
+  </a>
+  <a class="link-button" href="https://www.e-stat.go.jp" target="_blank" rel="noopener noreferrer">
+    日e-STAT政府統計
+  </a>
+  <a class="link-button" href="https://www.stat.go.jp" target="_blank" rel="noopener noreferrer">
+    日총무성통계
+  </a>
+  <a class="link-button" href="https://www.jfa-fc.or.jp" target="_blank" rel="noopener noreferrer">
+    日本フランチャイズチェーン協会
+  </a>
+  <a class="link-button" href="https://www.super.or.jp" target="_blank" rel="noopener noreferrer">
+    日本全国スーパーマーケット協会
+  </a>
+  <a class="link-button" href="https://www.jada.or.jp" target="_blank" rel="noopener noreferrer">
+    日本自動車販売協会
+  </a>
+  <a class="link-button" href="https://www.jetro.go.jp" target="_blank" rel="noopener noreferrer">
+    日本貿易振興機構
+  </a>
+    </div>
+  </div>
 
 </body>
 </html>
-
-
