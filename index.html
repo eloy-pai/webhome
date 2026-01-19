@@ -47,6 +47,106 @@
 <body>
 
 
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>World Clock Table</title>
+  <style>
+    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; padding: 16px; }
+    h2 { margin: 0 0 12px; font-size: 18px; }
+    table { border-collapse: collapse; width: 100%; max-width: 720px; }
+    th, td { border: 1px solid #ccc; padding: 10px 12px; text-align: center; }
+    thead th { background: #f6f6f6; }
+  </style>
+</head>
+
+<body>
+  <h2 id="title"></h2>
+
+  <table aria-label="World clock">
+    <thead>
+      <tr>
+        <th>Tokyo</th>
+        <th>Hong Kong</th>
+        <th>Paris</th>
+        <th>London</th>
+        <th>New York</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td id="tky"></td>
+        <td id="hkg"></td>
+        <td id="par"></td>
+        <td id="lon"></td>
+        <td id="nyc"></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <script>
+    // IANA time zone IDs used by Intl.DateTimeFormat timeZone option [web:1][web:2]
+    const ZONES = {
+      Tokyo: "Asia/Tokyo",
+      "Hong Kong": "Asia/Hong_Kong",
+      Paris: "Europe/Paris",
+      London: "Europe/London",
+      "New York": "America/New_York",
+    };
+
+    const pad2 = (n) => String(n).padStart(2, "0");
+
+    // Format: en-GB, hour+minute only (no seconds) [web:1][web:2]
+    function formatTimeHHMM(date, timeZone) {
+      const parts = new Intl.DateTimeFormat("en-GB", {
+        timeZone,
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: false
+      }).formatToParts(date);
+
+      const hh = parts.find(p => p.type === "hour")?.value ?? "";
+      const mm = parts.find(p => p.type === "minute")?.value ?? "";
+      return `${pad2(hh)}:${pad2(mm)}`;
+    }
+
+    // Title: "Tokyo date (weekday) / New York date (weekday)" in en-GB [web:1][web:2]
+    function formatTitleDate(date, timeZone) {
+      // Example output: "Monday, 19 January 2026" (en-GB ordering) [web:1]
+      return new Intl.DateTimeFormat("en-GB", {
+        timeZone,
+        weekday: "short",
+        day: "2-digit",
+        month: "long",
+        year: "numeric"
+      }).format(date);
+    }
+
+    function render() {
+      const now = new Date();
+
+      document.getElementById("title").textContent =
+        `Tokyo: ${formatTitleDate(now, ZONES.Tokyo)} / New York: ${formatTitleDate(now, ZONES["New York"])}`;
+
+      document.getElementById("tky").textContent = formatTimeHHMM(now, ZONES.Tokyo);
+      document.getElementById("hkg").textContent = formatTimeHHMM(now, ZONES["Hong Kong"]);
+      document.getElementById("par").textContent = formatTimeHHMM(now, ZONES.Paris);
+      document.getElementById("lon").textContent = formatTimeHHMM(now, ZONES.London);
+      document.getElementById("nyc").textContent = formatTimeHHMM(now, ZONES["New York"]);
+    }
+
+    render();
+    // Optional: update every minute (keeps minutes accurate without showing seconds)
+    setInterval(render, 1000 * 30);
+  </script>
+</body>
+</html>
+
+
+  <h1>시장동향</h1>
+
 
 <!-- TradingView Widget BEGIN -->
 <div class="tradingview-widget-container">
