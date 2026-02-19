@@ -248,6 +248,7 @@
     </style>
 </head>
 <body>
+
     <div class="container">
         <!-- 세계시계 -->
         <div class="world-clock">
@@ -267,6 +268,48 @@
                 <div class="clock-time" id="london-time"></div>
             </div>
         </div>
+
+    <script>
+        function updateClocks() {
+            const now = new Date();
+
+            // 도쿄 (JST, UTC+9)
+            const tokyoTime = new Date(now.toLocaleString('en-US', { timeZone: 'Asia/Tokyo' }));
+            document.getElementById('tokyo-date').textContent = formatDate(tokyoTime);
+            document.getElementById('tokyo-time').textContent = formatTime(tokyoTime);
+
+            // 뉴욕 (EST/EDT, UTC-5/-4)
+            const newyorkTime = new Date(now.toLocaleString('en-US', { timeZone: 'America/New_York' }));
+            document.getElementById('newyork-date').textContent = formatDate(newyorkTime);
+            document.getElementById('newyork-time').textContent = formatTime(newyorkTime);
+
+            // 런던 (GMT/BST, UTC+0/+1)
+            const londonTime = new Date(now.toLocaleString('en-US', { timeZone: 'Europe/London' }));
+            document.getElementById('london-date').textContent = formatDate(londonTime);
+            document.getElementById('london-time').textContent = formatTime(londonTime);
+        }
+
+        function formatDate(date) {
+            const days = ['일', '월', '화', '수', '목', '금', '토'];
+            const year = date.getFullYear();
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const day = String(date.getDate()).padStart(2, '0');
+            const dayOfWeek = days[date.getDay()];
+
+            return `${year}.${month}.${day} (${dayOfWeek})`;
+        }
+
+        function formatTime(date) {
+            const hours = String(date.getHours()).padStart(2, '0');
+            const minutes = String(date.getMinutes()).padStart(2, '0');
+
+            return `${hours}:${minutes}`;
+        }
+
+        // 초기 실행 및 1분마다 업데이트
+        updateClocks();
+        setInterval(updateClocks, 60000);
+    </script>
 
 
 
@@ -433,10 +476,6 @@
       "title": "Bitcoin"
     },
     {
-      "proName": "BITSTAMP:ETHUSD",
-      "title": "Ethereum"
-    },
-    {
       "proName": "FX:EURUSD",
       "title": "EUR/USD"
     },
@@ -477,10 +516,6 @@
       "title": "USD/CNY"
     },
     {
-      "proName": "FX:USDKRW",
-      "title": "USD/KRW"
-    },
-    {
       "proName": "TVC:GOLD",
       "title": "Gold_USD"
     },
@@ -499,6 +534,9 @@
 </div>
 <!-- TradingView Widget END -->
 
+<br>
+<br>
+
 
         <h1>참고자료</h1>
 
@@ -514,6 +552,23 @@
                 <a class="link-button" href="https://www.metoffice.gov.uk" target="_blank" rel="noopener noreferrer">英기상청</a>
                 <a class="link-button" href="https://www.hko.gov.hk" target="_blank" rel="noopener noreferrer">HK기상청</a>
                 <a class="link-button" href="https://www.weather.gov.sg" target="_blank" rel="noopener noreferrer">SG기상청</a>
+            </div>
+        </div>
+
+        <!-- 2-1. 대안매체 -->
+        <div class="section">
+            <h2>대안매체</h2>
+            <div class="button-row">
+                <a class="link-button" href="https://x.com" target="_blank" rel="noopener noreferrer">X.com</a>
+                <a class="link-button" href="https://note.com" target="_blank" rel="noopener noreferrer">Note</a>
+                <a class="link-button" href="https://blog.naver.com/marketourist" target="_blank" rel="noopener noreferrer">네이버블로그</a>
+                <a class="link-button" href="https://newspicks.com" target="_blank" rel="noopener noreferrer">Newspicks</a>
+                <a class="link-button" href="https://hatena.blog" target="_blank" rel="noopener noreferrer">Hatena</a>
+                <a class="link-button" href="https://www.livedoor.com" target="_blank" rel="noopener noreferrer">Livedoor</a>
+                <a class="link-button" href="https://truthsocial.com" target="_blank" rel="noopener noreferrer">TruthSocial</a>
+                <a class="link-button" href="https://bsky.app" target="_blank" rel="noopener noreferrer">BlueSky</a>
+                <a class="link-button" href="https://www.reddit.com" target="_blank" rel="noopener noreferrer">Reddit</a>
+                <a class="link-button" href="https://michaeljburry.substack.com" target="_blank" rel="noopener noreferrer">MichaelBurry_Substack</a>
             </div>
         </div>
 
@@ -594,22 +649,6 @@
                 <a class="link-button" href="https://dempa-digital.com" target="_blank" rel="noopener noreferrer">電波新聞</a>
                 <a class="link-button" href="https://www.hokkaido-np.co.jp" target="_blank" rel="noopener noreferrer">北海道新聞</a>
                 <a class="link-button" href="https://www.chunichi.co.jp" target="_blank" rel="noopener noreferrer">中日新聞</a>
-            </div>
-        </div>
-
-        <!-- 2-1. 대안언론 -->
-        <div class="section">
-            <h2>대안언론</h2>
-            <div class="button-row">
-                <a class="link-button" href="https://newspicks.com" target="_blank" rel="noopener noreferrer">Newspicks</a>
-                <a class="link-button" href="https://hatena.blog" target="_blank" rel="noopener noreferrer">Hatena</a>
-                <a class="link-button" href="https://note.com" target="_blank" rel="noopener noreferrer">Note</a>
-                <a class="link-button" href="https://www.livedoor.com" target="_blank" rel="noopener noreferrer">Livedoor</a>
-                <a class="link-button" href="https://truthsocial.com" target="_blank" rel="noopener noreferrer">TruthSocial</a>
-                <a class="link-button" href="https://bsky.app" target="_blank" rel="noopener noreferrer">BlueSky</a>
-                <a class="link-button" href="https://x.com" target="_blank" rel="noopener noreferrer">X.com</a>
-                <a class="link-button" href="https://www.reddit.com" target="_blank" rel="noopener noreferrer">Reddit</a>
-                <a class="link-button" href="https://michaeljburry.substack.com" target="_blank" rel="noopener noreferrer">MichaelBurry_Substack</a>
             </div>
         </div>
 
@@ -702,7 +741,7 @@
             </div>
         </div>
 
-        <!-- 3. 참고자료 -->
+        <!-- 4. 참고자료 -->
         <div class="section">
             <h2>참고자료</h2>
             <div class="button-row">
@@ -720,47 +759,6 @@
 
 
 
-    <script>
-        function updateClocks() {
-            const now = new Date();
-
-            // 도쿄 (JST, UTC+9)
-            const tokyoTime = new Date(now.toLocaleString('en-US', { timeZone: 'Asia/Tokyo' }));
-            document.getElementById('tokyo-date').textContent = formatDate(tokyoTime);
-            document.getElementById('tokyo-time').textContent = formatTime(tokyoTime);
-
-            // 뉴욕 (EST/EDT, UTC-5/-4)
-            const newyorkTime = new Date(now.toLocaleString('en-US', { timeZone: 'America/New_York' }));
-            document.getElementById('newyork-date').textContent = formatDate(newyorkTime);
-            document.getElementById('newyork-time').textContent = formatTime(newyorkTime);
-
-            // 런던 (GMT/BST, UTC+0/+1)
-            const londonTime = new Date(now.toLocaleString('en-US', { timeZone: 'Europe/London' }));
-            document.getElementById('london-date').textContent = formatDate(londonTime);
-            document.getElementById('london-time').textContent = formatTime(londonTime);
-        }
-
-        function formatDate(date) {
-            const days = ['일', '월', '화', '수', '목', '금', '토'];
-            const year = date.getFullYear();
-            const month = String(date.getMonth() + 1).padStart(2, '0');
-            const day = String(date.getDate()).padStart(2, '0');
-            const dayOfWeek = days[date.getDay()];
-
-            return `${year}.${month}.${day} (${dayOfWeek})`;
-        }
-
-        function formatTime(date) {
-            const hours = String(date.getHours()).padStart(2, '0');
-            const minutes = String(date.getMinutes()).padStart(2, '0');
-
-            return `${hours}:${minutes}`;
-        }
-
-        // 초기 실행 및 1분마다 업데이트
-        updateClocks();
-        setInterval(updateClocks, 60000);
-    </script>
 
 
 </body>
