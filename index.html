@@ -1,6 +1,113 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>멀티 검색기 - 새 탭으로 열기</title>
+  <style>
+    body {
+      font-family: system-ui, sans-serif;
+      background: #f9fafb;
+      margin: 0;
+      padding: 40px 20px;
+      color: #111;
+    }
+    .container { max-width: 800px; margin: 0 auto; text-align: center; }
+    h1 { color: #1d4ed8; margin-bottom: 2rem; }
+    input[type="text"] {
+      width: 100%; max-width: 600px;
+      padding: 16px 20px;
+      font-size: 1.2rem;
+      border: 2px solid #d1d5db;
+      border-radius: 12px;
+      outline: none;
+    }
+    input:focus { border-color: #3b82f6; box-shadow: 0 0 0 4px #bfdbfe; }
+    .buttons {
+      margin: 2.5rem 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      justify-content: center;
+    }
+    .btn {
+      padding: 14px 32px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .google { background: #4285f4; }
+    .google:hover { background: #3367d6; }
+    .naver  { background: #03c75a; }
+    .naver:hover  { background: #02b350; }
+    .daum   { background: #4a6bb3; }
+    .daum:hover   { background: #3e5a9e; }
+    .bing   { background: #008373; }
+    .bing:hover   { background: #00695c; }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h1>한 번에 여러 포털 검색</h1>
+
+  <input type="text" id="query" placeholder="검색어 입력 후 Enter 또는 버튼 클릭" autofocus>
+
+  <div class="buttons">
+    <button class="btn google" onclick="openSearch('google')">Google</button>
+    <button class="btn naver"  onclick="openSearch('naver')">Naver</button>
+    <button class="btn daum"   onclick="openSearch('daum')">Daum</button>
+    <button class="btn bing"   onclick="openSearch('bing')">Bing</button>
+  </div>
+
+  <p style="margin-top:3rem; color:#666; font-size:0.95rem;">
+    ※ 보안 정책으로 iframe이 차단되어 새 탭으로 열립니다.
+  </p>
+</div>
+
+<script>
+function openSearch(engine) {
+  const q = document.getElementById('query').value.trim();
+  if (!q) {
+    alert('검색어를 입력해주세요!');
+    return;
+  }
+  const encoded = encodeURIComponent(q);
+  let url = '';
+
+  switch(engine) {
+    case 'google': url = `https://www.google.com/search?q=${encoded}`; break;
+    case 'naver':  url = `https://search.naver.com/search.naver?query=${encoded}`; break;
+    case 'daum':   url = `https://search.daum.net/search?w=tot&q=${encoded}`; break;
+    case 'bing':   url = `https://www.bing.com/search?q=${encoded}`; break;
+  }
+
+  if (url) window.open(url, '_blank');
+}
+
+document.getElementById('query').addEventListener('keydown', e => {
+  if (e.key === 'Enter') {
+    // 모두 열기 원하면 아래 주석 해제
+    // ['google','naver','daum','bing'].forEach(openSearch);
+    // 또는 특정 하나만
+    openSearch('google'); // 예: 엔터 → 구글만 열기
+  }
+});
+</script>
+
+</body>
+</html>
+
+
+
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>참고자료</title>
