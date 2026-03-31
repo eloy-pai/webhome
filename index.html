@@ -420,151 +420,6 @@ document.getElementById('query').addEventListener('keydown', e => {
 
 <br>
 
-  <h1>시장동향</h1>
-
-<table border="1" style="border-collapse: collapse; width: 100%; text-align: center;">
-    <thead>
-        <tr style="background-color: #f2f2f2;">
-            <th>Events</th>
-            <th>Jan</th>
-            <th>Feb</th>
-            <th>Mar</th>
-            <th>Apr</th>
-            <th>May</th>
-            <th>Jun</th>
-            <th>Jul</th>
-            <th>Aug</th>
-            <th>Sep</th>
-            <th>Oct</th>
-            <th>Nov</th>
-            <th>Dec</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td style="font-weight: bold; background-color: #f2f2f2;">BOC<br>2.25</td>
-            <td>28</td>
-            <td>-</td>
-            <td>18</td>
-            <td>29</td>
-            <td>-</td>
-            <td>10</td>
-            <td>15</td>
-            <td>-</td>
-            <td>2</td>
-            <td>28</td>
-            <td>-</td>
-            <td>9</td>
-        </tr>
-        <tr>
-            <td style="font-weight: bold; background-color: #f2f2f2;">FRB<br>3.50~3.75</td>
-            <td>27-28</td>
-            <td>-</td>
-            <td>17-18</td>
-            <td>28-29</td>
-            <td>-</td>
-            <td>16-17</td>
-            <td>28-29</td>
-            <td>-</td>
-            <td>15-16</td>
-            <td>27-28</td>
-            <td>-</td>
-            <td>8-9</td>
-        </tr>
-        <tr>
-            <td style="font-weight: bold; background-color: #f2f2f2;">BOJ<br>0.75</td>
-            <td>22-23</td>
-            <td>-</td>
-            <td>18-19</td>
-            <td>27-28</td>
-            <td>-</td>
-            <td>15-16</td>
-            <td>30-31</td>
-            <td>-</td>
-            <td>17-18</td>
-            <td>29-30</td>
-            <td>-</td>
-            <td>17-18</td>
-        </tr>
-        <tr>
-            <td style="font-weight: bold; background-color: #f2f2f2;">ECB<br>DF 2.00<br>MRO 2.15<br>MLF 2.40</td>
-            <td>-</td>
-            <td>4-5</td>
-            <td>18-19</td>
-            <td>29-30</td>
-            <td>-</td>
-            <td>10-11</td>
-            <td>22-23</td>
-            <td>-</td>
-            <td>9-10</td>
-            <td>28-29</td>
-            <td>-</td>
-            <td>16-17</td>
-        </tr>
-        <tr>
-            <td style="font-weight: bold; background-color: #f2f2f2;">BOE<br>3.75</td>
-            <td>-</td>
-            <td>5</td>
-            <td>19</td>
-            <td>30</td>
-            <td>-</td>
-            <td>18</td>
-            <td>30</td>
-            <td>-</td>
-            <td>17</td>
-            <td>-</td>
-            <td>5</td>
-            <td>17</td>
-        </tr>
-        <tr>
-            <td style="font-weight: bold; background-color: #f2f2f2;">RBA<br>4.10+25bp<br>2026.Mar</td>
-            <td>-</td>
-            <td>2-3</td>
-            <td>16-17</td>
-            <td>-</td>
-            <td>4-5</td>
-            <td>15-16</td>
-            <td>-</td>
-            <td>10-11</td>
-            <td>28-29</td>
-            <td>-</td>
-            <td>2-3</td>
-            <td>7-8</td>
-        </tr>
-        <tr>
-            <td style="font-weight: bold; background-color: #f2f2f2;">BOK<br>2.50</td>
-            <td>15</td>
-            <td>26</td>
-            <td>-</td>
-            <td>10</td>
-            <td>28</td>
-            <td>-</td>
-            <td>16</td>
-            <td>27</td>
-            <td>-</td>
-            <td>22</td>
-            <td>26</td>
-            <td>-</td>
-        </tr>
-        <tr>
-            <td style="font-weight: bold; background-color: #f2f2f2;">中LPR 1Y 3.00<br>中LPR 5Y 3.50</td>
-            <td>20</td>
-            <td>20</td>
-            <td>20</td>
-            <td>20</td>
-            <td>20</td>
-            <td>20</td>
-            <td>20</td>
-            <td>20</td>
-            <td>20</td>
-            <td>20</td>
-            <td>20</td>
-            <td>20</td>
-        </tr>
-    </tbody>
-</table>
-
-<br>
 
 <!-- TradingView Widget BEGIN -->
 <div class="tradingview-widget-container">
@@ -580,10 +435,6 @@ document.getElementById('query').addEventListener('keydown', e => {
     {
       "proName": "FX:EURUSD",
       "title": "EUR/USD"
-    },
-    {
-      "proName": "FX:EURJPY",
-      "title": "EUR/JPY"
     },
     {
       "proName": "FX:USDJPY",
@@ -604,8 +455,42 @@ document.getElementById('query').addEventListener('keydown', e => {
 </div>
 <!-- TradingView Widget END -->
 
+<br>
+
+        <!-- 1. 중앙은행 -->
+        <div class="section">
+            <h2>중앙은행 회의일정</h2>
+            <div class="button-row">
+                <a class="link-button" href="https://www.bankofcanada.ca" target="_blank" rel="noopener noreferrer">BOCanada</a>
+                <a class="link-button" href="https://www.federalreserve.gov" target="_blank" rel="noopener noreferrer">US.FedRB</a>
+                <a class="link-button" href="https://www.ecb.europa.eu" target="_blank" rel="noopener noreferrer">EuroCB</a>
+                <a class="link-button" href="https://www.bankofengland.co.uk" target="_blank" rel="noopener noreferrer">BOEngland</a>
+                <a class="link-button" href="https://www.rba.gov.au" target="_blank" rel="noopener noreferrer">RBAustralia</a>
+                <a class="link-button" href="https://www.pbc.gov.cn" target="_blank" rel="noopener noreferrer">中国人民银行</a>
+                <a class="link-button" href="https://www.boj.or.jp" target="_blank" rel="noopener noreferrer">日本銀行</a>
+                <a class="link-button" href="https://www.bok.or.kr" target="_blank" rel="noopener noreferrer">한국은행</a>
+            </div>
+        </div>
+
+
 
 <br>
+
+        <!-- 1. 기업공시 -->
+        <div class="section">
+            <h2>기업공시</h2>
+            <div class="button-row">
+                <a class="link-button" href="https://www.sec.gov/edgar/search" target="_blank" rel="noopener noreferrer">EDGAR공시</a>
+                <a class="link-button" href="https://www.release.tdnet.info" target="_blank" rel="noopener noreferrer">開示情報閲覧공시</a>
+                <a class="link-button" href="https://disclosure2.edinet-fsa.go.jp" target="_blank" rel="noopener noreferrer">金融庁EDINET공시</a>
+                <a class="link-button" href="https://dart.fss.or.kr" target="_blank" rel="noopener noreferrer">DART금감원공시</a>
+                <a class="link-button" href="https://kind.krx.co.kr" target="_blank" rel="noopener noreferrer">KRX_KIND공시</a>
+            </div>
+        </div>
+
+
+<br>
+
 
         <!-- 1. 시장자료 링크 -->
         <div class="section">
@@ -633,34 +518,17 @@ document.getElementById('query').addEventListener('keydown', e => {
                 <a class="link-button" href="https://finviz.com" target="_blank" rel="noopener noreferrer">Finviz Market</a>
                 <a class="link-button" href="https://tradingeconomics.com" target="_blank" rel="noopener noreferrer">Trading_Econo</a>
                 <a class="link-button" href="https://finance.naver.com/research" target="_blank" rel="noopener noreferrer">네이버증권</a>
-                <a class="link-button" href="https://www.sec.gov/edgar/search" target="_blank" rel="noopener noreferrer">EDGAR공시</a>
-                <a class="link-button" href="https://dart.fss.or.kr" target="_blank" rel="noopener noreferrer">DART금감원공시</a>
-                <a class="link-button" href="https://kind.krx.co.kr" target="_blank" rel="noopener noreferrer">KRX_KIND공시</a>
-                <a class="link-button" href="https://www.release.tdnet.info" target="_blank" rel="noopener noreferrer">開示情報閲覧공시</a>
-                <a class="link-button" href="https://disclosure2.edinet-fsa.go.jp" target="_blank" rel="noopener noreferrer">金融庁EDINET공시</a>
-                <a class="link-button" href="https://www.bankofcanada.ca" target="_blank" rel="noopener noreferrer">BOC</a>
-                <a class="link-button" href="https://home.treasury.gov" target="_blank" rel="noopener noreferrer">美TREASURY</a>
-                <a class="link-button" href="https://www.federalreserve.gov" target="_blank" rel="noopener noreferrer">Federal Reserve</a>
-                <a class="link-button" href="https://www.ecb.europa.eu" target="_blank" rel="noopener noreferrer">ECB</a>
-                <a class="link-button" href="https://www.bankofengland.co.uk" target="_blank" rel="noopener noreferrer">BOE</a>
-                <a class="link-button" href="https://www.rba.gov.au" target="_blank" rel="noopener noreferrer">RBA</a>
-                <a class="link-button" href="https://www.pbc.gov.cn" target="_blank" rel="noopener noreferrer">中国人民银行</a>
-                <a class="link-button" href="https://www.boj.or.jp" target="_blank" rel="noopener noreferrer">日本銀行</a>
                 <a class="link-button" href="https://www.jpx.co.jp" target="_blank" rel="noopener noreferrer">日本取引所</a>
                 <a class="link-button" href="https://jpx-jquants.com" target="_blank" rel="noopener noreferrer">日本取引所Quant</a>
                 <a class="link-button" href="https://indexes.nikkei.co.jp" target="_blank" rel="noopener noreferrer">日経指数</a>
                 <a class="link-button" href="https://www.hsi.com.hk/eng" target="_blank" rel="noopener noreferrer">HSIndex</a>
-                <a class="link-button" href="https://www.bok.or.kr" target="_blank" rel="noopener noreferrer">한국은행</a>
                 <a class="link-button" href="https://www.kofiabond.or.kr" target="_blank" rel="noopener noreferrer">금투협채권</a>
-                <a class="link-button" href="http://www.bookook.co.kr" target="_blank" rel="noopener noreferrer">부국증권</a>
                 <a class="link-button" href="https://www.kiwoom.com" target="_blank" rel="noopener noreferrer">키움증권</a>
                 <a class="link-button" href="https://securities.miraeasset.com" target="_blank" rel="noopener noreferrer">미래증권</a>
             </div>
         </div>
 
 <br>
-
-        <h1>참고자료</h1>
 
         <!-- 0. 날씨 -->
         <div class="section">
