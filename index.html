@@ -44,29 +44,21 @@
     .google:hover { background: #3367d6; }
     .naver  { background: #03c75a; }
     .naver:hover  { background: #02b350; }
-    .daum   { background: #4a6bb3; }
-    .daum:hover   { background: #3e5a9e; }
-    .bing   { background: #008373; }
-    .bing:hover   { background: #00695c; }
+    .YahooJP  { background: #03c75a; }
+    .YahooJP:hover  { background: #02b350; }
   </style>
 </head>
 <body>
 
 <div class="container">
-  <h1>한 번에 여러 포털 검색</h1>
 
   <input type="text" id="query" placeholder="검색어 입력 후 Enter 또는 버튼 클릭" autofocus>
 
   <div class="buttons">
     <button class="btn google" onclick="openSearch('google')">Google</button>
     <button class="btn naver"  onclick="openSearch('naver')">Naver</button>
-    <button class="btn daum"   onclick="openSearch('daum')">Daum</button>
-    <button class="btn bing"   onclick="openSearch('bing')">Bing</button>
+    <button class="btn YahooJP"  onclick="openSearch('YahooJP')">YahooJP</button>
   </div>
-
-  <p style="margin-top:3rem; color:#666; font-size:0.95rem;">
-    ※ 보안 정책으로 iframe이 차단되어 새 탭으로 열립니다.
-  </p>
 </div>
 
 <script>
@@ -82,8 +74,7 @@ function openSearch(engine) {
   switch(engine) {
     case 'google': url = `https://www.google.com/search?q=${encoded}`; break;
     case 'naver':  url = `https://search.naver.com/search.naver?query=${encoded}`; break;
-    case 'daum':   url = `https://search.daum.net/search?w=tot&q=${encoded}`; break;
-    case 'bing':   url = `https://www.bing.com/search?q=${encoded}`; break;
+    case 'YahooJP':   url = `https://search.yahoo.co.jp/search?p=${encoded}`; break;
   }
 
   if (url) window.open(url, '_blank');
@@ -92,7 +83,7 @@ function openSearch(engine) {
 document.getElementById('query').addEventListener('keydown', e => {
   if (e.key === 'Enter') {
     // 모두 열기 원하면 아래 주석 해제
-    // ['google','naver','daum','bing'].forEach(openSearch);
+    // ['google','naver','YahooJP'].forEach(openSearch);
     // 또는 특정 하나만
     openSearch('google'); // 예: 엔터 → 구글만 열기
   }
