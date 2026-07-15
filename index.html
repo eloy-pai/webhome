@@ -57,6 +57,68 @@
 <tv-tickers symbols="COINBASE:BTCUSD,FX:EURUSD,FX:USDJPY,FX:EURJPY,OANDA:XAUUSD" hide-chart></tv-tickers>
 
 
+<!-- ====================== 투자자별 순매수 현황 테이블 ====================== -->
+<div style="margin: 40px 0; padding: 20px; background-color: Black; border-radius: 8px;">
+    <h2 style="text-align: center; color: White; margin-bottom: 20px;">
+        KOSPI 투자자별 순매매(십억원)
+    </h2>
+    
+    <table style="width: 100%; border-collapse: collapse; background: Black; box-shadow: 0 4px 12px rgba(0,0,0,0.08);">
+        <thead>
+            <tr style="background-color: #2c3e50; color: white;">
+                <th style="padding: 14px 10px; border: 1px solid #ddd; text-align: center;">연도</th>
+                <th style="padding: 14px 10px; border: 1px solid #ddd;">24Q1</th>
+                <th style="padding: 14px 10px; border: 1px solid #ddd;">24Q2</th>
+                <th style="padding: 14px 10px; border: 1px solid #ddd;">24Q3</th>
+                <th style="padding: 14px 10px; border: 1px solid #ddd;">24Q4</th>
+                <th style="padding: 14px 10px; border: 1px solid #ddd;">25Q1</th>
+                <th style="padding: 14px 10px; border: 1px solid #ddd;">25Q2</th>
+                <th style="padding: 14px 10px; border: 1px solid #ddd;">25Q3</th>
+                <th style="padding: 14px 10px; border: 1px solid #ddd;">25Q4</th>
+                <th style="padding: 14px 10px; border: 1px solid #ddd;">25Q1</th>
+                <th style="padding: 14px 10px; border: 1px solid #ddd;">25Q2</th>
+                <th style="padding: 14px 10px; border: 1px solid #ddd;">25Q3</th>
+                <th style="padding: 14px 10px; border: 1px solid #ddd;">25Q4</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td style="padding: 12px 10px; font-weight: bold; background-color: #34495e; color: white; border: 1px solid #ddd;">외국인</td>
+                <td style="padding: 12px 10px; text-align: right; border: 1px solid #ddd;">15,769</td>
+                <td style="padding: 12px 10px; text-align: right; border: 1px solid #ddd;">6,653</td>
+                <td style="padding: 12px 10px; text-align: right; color: #e74c3c; border: 1px solid #ddd;">-9,095</td>
+                <td style="padding: 12px 10px; text-align: right; color: #e74c3c; border: 1px solid #ddd;">-12,047</td>
+                <td style="padding: 12px 10px; text-align: right; color: #e74c3c; border: 1px solid #ddd;">-6,306</td>
+                <td style="padding: 12px 10px; text-align: right; color: #e74c3c; border: 1px solid #ddd;">-6,622</td>
+                <td style="padding: 12px 10px; text-align: right; border: 1px solid #ddd;">12,138</td>
+                <td style="padding: 12px 10px; text-align: right; color: #e74c3c; border: 1px solid #ddd;">-8,257</td>
+                <td style="padding: 12px 10px; text-align: right; color: #e74c3c; border: 1px solid #ddd;">-69,417</td>
+                <td style="padding: 12px 10px; text-align: right; color: #e74c3c; border: 1px solid #ddd;">-108,909</td>
+                <td style="padding: 12px 10px; text-align: right; color: #e74c3c; border: 1px solid #ddd;">-15,741</td>
+                <td style="padding: 12px 10px; text-align: right; border: 1px solid #ddd;">0</td>
+            </tr>
+            <tr>
+                <td style="padding: 12px 10px; font-weight: bold; background-color: #34495e; color: white; border: 1px solid #ddd;">기관</td>
+                <td style="padding: 12px 10px; text-align: right; color: #e74c3c; border: 1px solid #ddd;">-44,048</td>
+                <td style="padding: 12px 10px; text-align: right; color: #e74c3c; border: 1px solid #ddd;">-3,897</td>
+                <td style="padding: 12px 10px; text-align: right; border: 1px solid #ddd;">3,658</td>
+                <td style="padding: 12px 10px; text-align: right; border: 1px solid #ddd;">6,175</td>
+                <td style="padding: 12px 10px; text-align: right; border: 1px solid #ddd;">2,584</td>
+                <td style="padding: 12px 10px; text-align: right; border: 1px solid #ddd;">28,948</td>
+                <td style="padding: 12px 10px; text-align: right; border: 1px solid #ddd;">2,389</td>
+                <td style="padding: 12px 10px; text-align: right; border: 1px solid #ddd;">10,286</td>
+                <td style="padding: 12px 10px; text-align: right; border: 1px solid #ddd;">8,213</td>
+                <td style="padding: 12px 10px; text-align: right; border: 1px solid #ddd;">20,661</td>
+                <td style="padding: 12px 10px; text-align: right; color: #e74c3c; border: 1px solid #ddd;">-177</td>
+                <td style="padding: 12px 10px; text-align: right; border: 1px solid #ddd;">0</td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>
+<!-- ====================== 테이블 끝 ====================== -->
+
+
         <!-- 검색창 + 검색엔진 선택 -->
         <div class="flex gap-3 mb-12">
             <select id="searchEngine" 
@@ -87,15 +149,15 @@
                     <i class="Bank text-3xl text-red-500"></i>
                     <h3 class="font-semibold text-xl">Bank</h3>
                 </div>
-<a href="https://www.bankofcanada.ca" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">BOCanada</a>
-<a href="https://www.federalreserve.gov" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">US.FedRB</a>
-<a href="https://www.ecb.europa.eu" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">EuroCB</a>
-<a href="https://www.bankofengland.co.uk" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">BOEngland</a>
-<a href="https://www.rba.gov.au" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">RBAustralia</a>
-<a href="https://www.pbc.gov.cn" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">中国人民银行</a>
-<a href="https://www.boj.or.jp" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">日本銀行</a>
-<a href="https://www.bok.or.kr" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">한국은행</a>
-<a href="https://www.bot.or.th" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">BankOfThailand</a>
+<a href="https://www.ecb.europa.eu" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">ECB_2.25_인상</a>
+<a href="https://www.bankofengland.co.uk" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">BOE_3.75_동결</a>
+<a href="https://www.bankofcanada.ca" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">BOC_2.25_동결</a>
+<a href="https://www.federalreserve.gov" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">FRB_3.75_동결</a>
+<a href="https://www.rba.gov.au" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">RBA_4.35_동결</a>
+<a href="https://www.pbc.gov.cn" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">人民银行_3.00_동결</a>
+<a href="https://www.boj.or.jp" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">日本銀行_1.00_인상</a>
+<a href="https://www.bok.or.kr" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">한은_2.50_동결</a>
+<a href="https://www.bot.or.th" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">BOT_1.00_동결</a>
             </div>
 
             <div class="card bg-zinc-900 border border-zinc-800 rounded-3xl p-6 hover:border-cyan-500">
@@ -136,6 +198,8 @@
 <a href="https://unusualwhales.com" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">UnusualWhales</a>
 <a href="https://finance.naver.com" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">네이버증권</a>
 <a href="https://wcomp.fnguide.com" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">FN기업개요</a>
+<a href="https://www.kofiabond.or.kr" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">금투협채권</a>
+<a href="https://freesis.kofia.or.kr" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">금투협통계</a>
             </div>
 
             <div class="card bg-zinc-900 border border-zinc-800 rounded-3xl p-6 hover:border-cyan-500">
