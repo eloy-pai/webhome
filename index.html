@@ -1,437 +1,483 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Favorites</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
-    <style>
-        body {
-            background: #0a0a0a;
-            font-family: 'Pretendard', system-ui, sans-serif;
-        }
-        
-        .card {
-            transition: all 0.3s ease;
-        }
-        
-        .card:hover {
-            transform: translateY(-8px) scale(1.03);
-            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.5);
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>신문가게 — 오늘의 신문 가판대</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700;900&family=Nanum+Gothic:wght@400;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper: #f3ede0;
+    --paper-2: #eae2d0;
+    --ink: #1c1a17;
+    --ink-soft: #4a453d;
+    --masthead-red: #a5271f;
+    --stamp-blue: #2a4258;
+    --gold: #b8892b;
+    --rule: #c9bfa8;
+  }
 
-        .neon-text {
-            text-shadow: 0 0 10px #22d3ee;
-        }
-    </style>
+  *{ box-sizing:border-box; }
+
+  html,body{
+    margin:0;
+    padding:0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family:'Nanum Gothic', sans-serif;
+  }
+
+  body{
+    background-image:
+      radial-gradient(circle at 20% 10%, rgba(0,0,0,0.02), transparent 40%),
+      radial-gradient(circle at 80% 80%, rgba(0,0,0,0.02), transparent 40%);
+  }
+
+  a{ color:inherit; text-decoration:none; }
+
+  .wrap{
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 28px 24px 80px;
+  }
+
+  /* ===== Masthead ===== */
+  .masthead-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    flex-wrap: wrap;
+    gap: 8px 20px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    letter-spacing:0.04em;
+    color: var(--ink-soft);
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 8px;
+  }
+
+  .world-clocks{
+    display:flex;
+    flex-wrap: wrap;
+    gap: 6px 22px;
+  }
+
+  .world-clocks .clock{
+    white-space: nowrap;
+  }
+
+  .world-clocks .clock .city{
+    color: var(--masthead-red);
+    font-weight: 500;
+    margin-right: 6px;
+  }
+
+  .edition-tag{
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .masthead{
+    text-align:center;
+    padding: 26px 0 18px;
+    border-bottom: 4px double var(--ink);
+  }
+
+  .masthead .kicker{
+    font-family:'IBM Plex Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.35em;
+    color: var(--masthead-red);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .masthead h1{
+    font-family:'Noto Serif KR', serif;
+    font-weight: 900;
+    font-size: clamp(42px, 8vw, 84px);
+    margin: 0;
+    letter-spacing: 0.02em;
+    line-height: 1;
+  }
+
+  .masthead .sub{
+    margin-top: 12px;
+    font-family:'Noto Serif KR', serif;
+    font-size: 14px;
+    color: var(--ink-soft);
+    font-style: italic;
+  }
+
+  .search-bar{
+    margin: 20px auto 0;
+    max-width: 420px;
+    display:flex;
+    align-items:center;
+    gap: 0;
+    border: 1.5px solid var(--ink);
+    background: var(--paper-2);
+  }
+
+  .search-bar input[type="text"]{
+    flex:1;
+    min-width: 0;
+    padding: 10px 14px;
+    border: none;
+    background: transparent;
+    font-family:'Nanum Gothic', sans-serif;
+    font-size: 13.5px;
+    color: var(--ink);
+  }
+  .search-bar input[type="text"]::placeholder{
+    color: var(--ink-soft);
+    opacity: 0.7;
+  }
+  .search-bar input[type="text"]:focus{
+    outline: none;
+  }
+
+  .search-bar button{
+    display:flex;
+    align-items:center;
+    gap: 6px;
+    padding: 10px 16px;
+    border: none;
+    border-left: 1.5px solid var(--ink);
+    background: var(--ink);
+    color: var(--paper);
+    font-family:'IBM Plex Mono', monospace;
+    font-size: 11.5px;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+  }
+  .search-bar button:hover{ background: var(--masthead-red); }
+  .search-bar button svg{ width:13px; height:13px; }
+
+  .masthead-bottom{
+    display:flex;
+    justify-content:space-between;
+    font-family:'IBM Plex Mono', monospace;
+    font-size: 10.5px;
+    color: var(--ink-soft);
+    padding-top: 8px;
+    letter-spacing: 0.05em;
+  }
+
+  .masthead-bottom a{
+    color: var(--ink-soft);
+    border-bottom: 1px solid var(--rule);
+    transition: color .15s ease, border-color .15s ease;
+  }
+  .masthead-bottom a:hover{
+    color: var(--masthead-red);
+    border-color: var(--masthead-red);
+  }
+
+  /* ===== Notice box ===== */
+  .notice{
+    margin: 26px 0 10px;
+    border: 1px solid var(--ink);
+    padding: 16px 18px;
+    background: var(--paper-2);
+    font-size: 13.5px;
+    line-height: 1.65;
+    color: var(--ink-soft);
+    position: relative;
+  }
+  .notice::before{
+    content: "편집자 주";
+    position:absolute;
+    top:-11px;
+    left: 16px;
+    background: var(--paper);
+    padding: 0 8px;
+    font-family:'Noto Serif KR', serif;
+    font-weight:700;
+    font-size: 12px;
+    color: var(--masthead-red);
+  }
+
+  /* ===== Sections row layout: 3 per row, then wraps below ===== */
+  .sections-grid{
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 32px;
+    row-gap: 40px;
+    margin-top: 30px;
+  }
+
+  .section{
+    border-left: 1px solid var(--rule);
+    padding-left: 24px;
+  }
+  .sections-grid > .section:nth-child(3n+1){
+    border-left: none;
+    padding-left: 0;
+  }
+
+  .section-head{
+    display:flex;
+    align-items:baseline;
+    flex-wrap: wrap;
+    gap: 10px;
+    border-bottom: 3px solid var(--ink);
+    padding-bottom: 8px;
+    margin-bottom: 18px;
+  }
+
+  .section-head .num{
+    font-family:'IBM Plex Mono', monospace;
+    font-size: 12px;
+    color: var(--paper);
+    background: var(--stamp-blue);
+    padding: 2px 8px;
+  }
+
+  .section-head h2{
+    font-family:'Noto Serif KR', serif;
+    font-weight: 700;
+    font-size: 20px;
+    margin: 0;
+  }
+
+  .section-head .desc{
+    font-size: 10.5px;
+    color: var(--ink-soft);
+    margin-left: auto;
+    font-family:'IBM Plex Mono', monospace;
+  }
+
+  .list{
+    display:flex;
+    flex-direction: column;
+  }
+
+  .entry{
+    padding: 14px 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .entry:last-child{ border-bottom:none; }
+
+  .entry a{
+    display:block;
+  }
+
+  .entry .headline{
+    font-family:'Noto Serif KR', serif;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 1.35;
+    transition: color .15s ease;
+  }
+  .entry a:hover .headline{ color: var(--masthead-red); }
+
+  .entry .meta{
+    margin-top: 5px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size: 10.5px;
+    color: var(--ink-soft);
+    letter-spacing: 0.03em;
+  }
+
+  .entry .blurb{
+    margin-top: 6px;
+    font-size: 12.5px;
+    color: var(--ink-soft);
+    line-height: 1.5;
+  }
+
+  footer{
+    margin-top: 60px;
+    border-top: 4px double var(--ink);
+    padding-top: 16px;
+    text-align:center;
+    font-family:'IBM Plex Mono', monospace;
+    font-size: 10.5px;
+    color: var(--ink-soft);
+    letter-spacing: 0.08em;
+  }
+
+  @media (max-width: 980px){
+    .sections-grid{ grid-template-columns: repeat(2, 1fr); }
+    .sections-grid > .section:nth-child(3n+1){ border-left: 1px solid var(--rule); padding-left: 24px; }
+    .sections-grid > .section:nth-child(2n+1){ border-left: none; padding-left: 0; }
+  }
+
+  @media (max-width: 640px){
+    .sections-grid{ grid-template-columns: 1fr; }
+    .sections-grid > .section{ border-left:none; padding-left:0; border-top:1px solid var(--rule); padding-top:20px; }
+    .sections-grid > .section:first-child{ border-top:none; padding-top:0; }
+    .masthead h1{ font-size: 46px; }
+  }
+
+  :focus-visible{
+    outline: 2px solid var(--masthead-red);
+    outline-offset: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .entry .headline{ transition:none; }
+  }
+</style>
 </head>
-<body class="min-h-screen text-gray-200">
-    <div class="max-w-6xl mx-auto p-8">
-        <!-- 헤더 -->
-        <header class="flex items-center justify-between mb-12">
-            <div class="flex items-center gap-4">
-                <i class="fa-solid fa-bookmark text-4xl text-cyan-400"></i>
-                <h1 class="text-4xl font-bold tracking-tight neon-text">My Favorites</h1>
-            </div>
-            
-            <!-- 세계 시간 -->
-            <div class="text-sm text-gray-400 flex items-center gap-6">
-                <div>
-                    <span class="text-rose-400">NewYork</span>: 
-                    <span id="ny-time" class="font-mono"></span>
-                </div>
-                <div>
-                    <span class="text-cyan-400">Tokyo</span>: 
-                    <span id="tokyo-time" class="font-mono"></span>
-                </div>
-                <div>
-                    <span class="text-emerald-400">London</span>: 
-                    <span id="london-time" class="font-mono"></span>
-                </div>
-            </div>
-        </header>
+<body>
+<div class="wrap">
 
+  <div class="masthead-top">
+    <div class="world-clocks">
+      <span class="clock" id="clock-kr"><span class="city">서울</span><span class="value">—</span></span>
+      <span class="clock" id="clock-uk"><span class="city">런던</span><span class="value">—</span></span>
+      <span class="clock" id="clock-us"><span class="city">워싱턴 D.C.</span><span class="value">—</span></span>
+    </div>
+    <span class="edition-tag">가판대 정가 · 무료 열람</span>
+  </div>
 
-<script type="module" src="https://widgets.tradingview-widget.com/w/en/tv-tickers.js"></script>
-<tv-tickers symbols="COINBASE:BTCUSD,FX:EURUSD,FX:USDJPY,FX:EURJPY,OANDA:XAUUSD" hide-chart></tv-tickers>
+  <div class="masthead">
+    <div class="kicker">Curated Link Newsstand</div>
+    <h1>신 문 가 게</h1>
+    <div class="sub">— 오늘도 좋은 소식만 골라 놓았습니다 —</div>
+    <form class="search-bar" action="https://www.google.com/search" method="GET" target="_blank">
+      <input type="text" name="q" placeholder="구글에서 검색어를 입력하세요" autocomplete="off">
+      <button type="submit">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        검색
+      </button>
+    </form>
+  </div>
 
+  <div class="masthead-bottom">
+    <span>제 1 호 · 링크 모음판</span>
+    <a href="market.html">시장자료모음</a>
+    <span>NEWSSTAND EDITION</span>
+  </div>
 
-        <!-- 검색창 + 검색엔진 선택 -->
-        <div class="flex gap-3 mb-12">
-            <select id="searchEngine" 
-                    class="bg-zinc-900 border border-zinc-700 focus:border-cyan-400 rounded-2xl px-5 py-5 text-lg outline-none transition-colors w-52">
-                <option value="google">Google</option>
-                <option value="YahooJP">YahooJP</option>
-                <option value="duckduckgo">DuckDuckGo</option>
-                <option value="Yandex">Yandex</option>
-            </select>
+  <div class="notice">
+    이 페이지는 여러 언론사·매체의 링크를 한곳에 모아둔 개인용 뉴스 가판대입니다.
+    아래 진열대에서 원하는 신문을 골라 클릭하면 해당 사이트로 이동합니다.
+  </div>
 
-            <div class="relative flex-1">
-                <input 
-                    type="text" 
-                    id="search"
-                    placeholder="검색어를 입력하세요..."
-                    class="w-full bg-zinc-900 border border-zinc-700 focus:border-cyan-400 rounded-2xl px-6 py-5 text-lg outline-none transition-colors">
-                <i class="fa-solid fa-magnifying-glass absolute right-6 top-1/2 -translate-y-1/2 text-gray-500"></i>
-            </div>
-        </div>
+  <div class="sections-grid">
 
-
-        <!-- 즐겨찾기 그리드 -->
-        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
-            <!-- 기존 카드들 유지 (필요시 더 추가) -->
-
-            <div class="card bg-zinc-900 border border-zinc-800 rounded-3xl p-6 hover:border-cyan-500">
-                <div class="flex items-center gap-3 mb-4">
-                    <i class="Bank text-3xl text-red-500"></i>
-                    <h3 class="font-semibold text-xl">Bank</h3>
-                </div>
-<a href="https://www.ecb.europa.eu" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">ECB_2.25_동결</a>
-<a href="https://www.bankofengland.co.uk" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">BOE_3.75_동결</a>
-<a href="https://www.bankofcanada.ca" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">BOC_2.25_동결</a>
-<a href="https://www.federalreserve.gov" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">FRB_3.75_동결</a>
-<a href="https://www.rba.gov.au" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">RBA_4.35_동결</a>
-<a href="https://www.pbc.gov.cn" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">人民银行_3.00_동결</a>
-<a href="https://www.boj.or.jp" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">日本銀行_1.00_인상</a>
-<a href="https://www.bok.or.kr" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">한은_2.75_인상</a>
-<a href="https://www.bot.or.th" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">BOT_1.00_동결</a>
-            </div>
-
-            <div class="card bg-zinc-900 border border-zinc-800 rounded-3xl p-6 hover:border-cyan-500">
-                <div class="flex items-center gap-3 mb-4">
-                    <i class="Disclosure text-3xl text-red-500"></i>
-                    <h3 class="font-semibold text-xl">Disclosure</h3>
-                </div>
-<a href="https://www.sec.gov/edgar/search" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">EDGAR공시</a>
-<a href="https://www.release.tdnet.info" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">開示情報閲覧공시</a>
-<a href="https://disclosure2.edinet-fsa.go.jp" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">金融庁EDINET공시</a>
-<a href="https://dart.fss.or.kr" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">DART금감원공시</a>
-<a href="https://kind.krx.co.kr" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">KRX_KIND공시</a>
-            </div>
-
-            <div class="card bg-zinc-900 border border-zinc-800 rounded-3xl p-6 hover:border-cyan-500">
-                <div class="flex items-center gap-3 mb-4">
-                    <i class="IPO text-3xl text-red-500"></i>
-                    <h3 class="font-semibold text-xl">IPO</h3>
-                </div>
-<a href="https://www.38.co.kr" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">IPO38커뮤</a>
-<a href="https://www.ipokiso.com" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">やさしいIPO</a>
-<a href="https://ipokabu.net" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">庶民のIPO</a>
-<a href="https://stockanalysis.com" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">IPOStockAnalyst</a>
-<a href="https://www.iposcoop.com" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">IPOscoop</a>
-<a href="https://www.renaissancecapital.com/IPO-Center" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">IPORenCapital</a>
-            </div>
-
-            <div class="card bg-zinc-900 border border-zinc-800 rounded-3xl p-6 hover:border-cyan-500">
-                <div class="flex items-center gap-3 mb-4">
-                    <i class="Market text-3xl text-red-500"></i>
-                    <h3 class="font-semibold text-xl">Market</h3>
-                </div>
-<a href="https://mktnews.com" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">Mktnews</a>
-<a href="https://www.financialjuice.com" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">Financialjuice</a>
-<a href="https://finviz.com" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">Finviz Market</a>
-<a href="https://www.thefly.com" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">The Fly</a>
-<a href="https://tradingeconomics.com" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">Trading_Econo</a>
-<a href="https://finance.yahoo.com" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">YahooFinance</a>
-<a href="https://unusualwhales.com" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">UnusualWhales</a>
-<a href="https://www.hsi.com.hk" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">HSI.HK</a>
-<a href="https://www.binance.com/en/futures/EWYUSDT" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">*EWYUSDT</a>
-<a href="https://www.kofiabond.or.kr" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">금투협채권</a>
-            </div>
-
-            <div class="card bg-zinc-900 border border-zinc-800 rounded-3xl p-6 hover:border-cyan-500">
-                <div class="flex items-center gap-3 mb-4">
-                    <i class="Market text-3xl text-red-500"></i>
-                    <h3 class="font-semibold text-xl">MarketJP</h3>
-                </div>
-<a href="https://kabutan.jp" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">かぶたん</a>
-<a href="https://minkabu.jp" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">みんかぶ</a>
-<a href="https://www.traders.co.jp" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">トレイダーズWEB</a>
-<a href="https://shikiho.toyokeizai.net" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">会社四季報</a>
-<a href="https://sekai-kabuka.com" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">世界株価</a>
-<a href="https://nikkei225jp.com" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">NIKKEI株価</a>
-<a href="https://www.jpx.co.jp" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">日本取引所</a>
-<a href="https://jpx-jquants.com" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">日本取引所Quant</a>
-<a href="https://indexes.nikkei.co.jp" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">日経指数</a>
-            </div>
-
-            <div class="card bg-zinc-900 border border-zinc-800 rounded-3xl p-6 hover:border-cyan-500">
-                <div class="flex items-center gap-3 mb-4">
-                    <i class="Securities text-3xl text-red-500"></i>
-                    <h3 class="font-semibold text-xl">Securities</h3>
-                </div>
-<a href="https://www.sbisec.co.jp" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">SBI証券</a>
-<a href="https://www.rakuten-sec.co.jp" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">楽天証券</a>
-<a href="https://www.daiwa.jp" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">大和証券</a>
-<a href="https://www.kiwoom.com" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">키움증권</a>
-<a href="https://securities.miraeasset.com" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">미래증권</a>
-<a href="http://www.bookook.co.kr" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">부국증권</a>
-            </div>
-
-            <div class="card bg-zinc-900 border border-zinc-800 rounded-3xl p-6 hover:border-cyan-500">
-                <div class="flex items-center gap-3 mb-4">
-                    <i class="Weather text-3xl text-red-500"></i>
-                    <h3 class="font-semibold text-xl">Weather</h3>
-                </div>
-<a href="https://tenki.jp" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">日Tenki</a>
-<a href="https://weathernews.jp" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">日WeatherNews</a>
-<a href="https://www.jma.go.jp" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">日기상청</a>
-<a href="https://www.weather.go.kr" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">韓기상청</a>
-<a href="https://www.weather.gov" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">美기상청</a>
-<a href="https://www.metoffice.gov.uk" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">英기상청</a>
-<a href="https://www.hko.gov.hk" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">HK기상청</a>
-<a href="https://www.weather.gov.sg" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">SG기상청</a>
-            </div>
-
-            <div class="card bg-zinc-900 border border-zinc-800 rounded-3xl p-6 hover:border-cyan-500">
-                <div class="flex items-center gap-3 mb-4">
-                    <i class="Statistics text-3xl text-red-500"></i>
-                    <h3 class="font-semibold text-xl">Statistics</h3>
-                </div>
-<a href="https://freesis.kofia.or.kr" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">금투협통계</a>
-<a href="https://kosis.kr" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">통계청</a>
-<a href="https://ecos.bok.or.kr" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">한국은행통계</a>
-<a href="https://fisis.fss.or.kr" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">금융사통계</a>
-<a href="https://tradedata.go.kr" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">관세청통계</a>
-<a href="https://www.itstat.go.kr" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">정보통신통계</a>
-<a href="https://tasis.nts.go.kr" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">국세청통계</a>
-<a href="https://fred.stlouisfed.org" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">美FRED_STL</a>
-<a href="https://www.e-stat.go.jp" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">日e-STAT통계</a>
-<a href="https://www.stat.go.jp" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">日총무성통계</a>
-            </div>
-
-            <div class="card bg-zinc-900 border border-zinc-800 rounded-3xl p-6 hover:border-cyan-500">
-                <div class="flex items-center gap-3 mb-4">
-                    <i class="Organizaton text-3xl text-red-500"></i>
-                    <h3 class="font-semibold text-xl">Association</h3>
-                </div>
-<a href="https://www.jfa-fc.or.jp" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">日本フランチャイズチェーン協会</a>
-<a href="https://www.super.or.jp" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">日本全国スーパーマーケット協会</a>
-<a href="https://www.jada.or.jp" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">日本自動車販売協会</a>
-<a href="https://www.jaia-jp.org" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">日本自動車輸入組合</a>
-<a href="https://www.jetro.go.jp" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">日本貿易振興機構</a>
-<a href="https://www.jsda.or.jp" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">日本証券業協会</a>
-<a href="http://www.citygas.or.kr" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">한국도시가스협회</a>
-            </div>
-
-            <div class="card bg-zinc-900 border border-zinc-800 rounded-3xl p-6 hover:border-cyan-500">
-                <div class="flex items-center gap-3 mb-4">
-                    <i class="Organizaton text-3xl text-red-500"></i>
-                    <h3 class="font-semibold text-xl">Research</h3>
-                </div>
-<a href="https://www.jsri.or.jp" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">日本証券経済研究所</a>
-<a href="https://www.nli-research.co.jp" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">ニッセイ基礎研究所</a>
-<a href="https://www.dir.co.jp" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">大和総研</a>
-<a href="https://www.wisereport.co.kr" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">WiseReport</a>
-<a href="https://wcomp.fnguide.com" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">FNguide기업</a>
-            </div>
-
-            <div class="card bg-zinc-900 border border-zinc-800 rounded-3xl p-6 hover:border-cyan-500">
-                <div class="flex items-center gap-3 mb-4">
-                    <i class="NewsBlog text-3xl text-red-500"></i>
-                    <h3 class="font-semibold text-xl">Radio,Blog</h3>
-                </div>
-<a href="https://radiko.jp" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">RadikoJP</a>
-<a href="https://tunein.com" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">TuneIn</a>
-<a href="https://x.com" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">X.com</a>
-<a href="https://note.com/dhkabukishibe" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">Note</a>
-<a href="https://hatena.blog" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">Hatena</a>
-<a href="https://truthsocial.com" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">TruthSocial</a>
-<a href="https://bsky.app" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">BlueSky</a>
-<a href="https://www.reddit.com" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">Reddit</a>
-            </div>
-
-            <div class="card bg-zinc-900 border border-zinc-800 rounded-3xl p-6 hover:border-cyan-500">
-                <div class="flex items-center gap-3 mb-4">
-                    <i class="NewsJP text-3xl text-red-500"></i>
-                    <h3 class="font-semibold text-xl">NewsJP</h3>
-                </div>
-<a href="https://news.web.nhk/newsweb" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">NHK</a>
-<a href="https://www.yomiuri.co.jp" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">読売新聞</a>
-<a href="https://www.sankei.com" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">産経新聞</a>
-<a href="https://mainichi.jp" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">毎日新聞</a>
-<a href="https://www.asahi.com" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">朝日新聞</a>
-<a href="https://www.nikkei.com" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">日本経済新</a>
-<a href="https://toyokeizai.net" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">東洋経済新報</a>
-            </div>
-
-            <div class="card bg-zinc-900 border border-zinc-800 rounded-3xl p-6 hover:border-cyan-500">
-                <div class="flex items-center gap-3 mb-4">
-                    <i class="NewsJP text-3xl text-red-500"></i>
-                    <h3 class="font-semibold text-xl">LocalNewsJP</h3>
-                </div>
-<a href="https://www.hokkaido-np.co.jp" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">北海道新聞</a>
-<a href="https://www.chunichi.co.jp" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">中日新聞</a>
-<a href="https://www.chugoku-np.co.jp" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">中国新聞</a>
-<a href="https://www.nishinippon.co.jp" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">西日本新聞</a>
-            </div>
-
-            <div class="card bg-zinc-900 border border-zinc-800 rounded-3xl p-6 hover:border-cyan-500">
-                <div class="flex items-center gap-3 mb-4">
-                    <i class="NewsKR text-3xl text-red-500"></i>
-                    <h3 class="font-semibold text-xl">NewsKR</h3>
-                </div>
-<a href="https://newspaper.kr" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">언론모음</a>
-<a href="https://www.kinds.or.kr" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">기사검색</a>
-<a href="https://news.einfomax.co.kr" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">연합경제</a>
-<a href="https://www.topdaily.kr" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">톱데일리</a>
-<a href="https://www.freezinenews.com" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">프리진뉴스</a>
-<a href="https://www.factfinder.tv" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">팩트파인더</a>
-<a href="https://www.thepublic.kr" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">더퍼블릭</a>
-<a href="https://www.smedaily.co.kr" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">중소기업신문</a>
-<a href="https://www.kmnanews.com" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">M&A경제신문</a>
-            </div>
-
-            <div class="card bg-zinc-900 border border-zinc-800 rounded-3xl p-6 hover:border-cyan-500">
-                <div class="flex items-center gap-3 mb-4">
-                    <i class="NewsUS text-3xl text-red-500"></i>
-                    <h3 class="font-semibold text-xl">NewsUS</h3>
-                </div>
-<a href="https://www.inoreader.com" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">Inoreader</a>
-<a href="https://www.nytimes.com" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">NYTimes</a>
-<a href="https://www.washingtonpost.com" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">WashingtonPost</a>
-<a href="https://www.wsj.com" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">WallStJournal</a>
-<a href="https://www.foxnews.com" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">FOXNews</a>
-<a href="https://www.newsmax.com" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">NewsMax</a>
-<a href="https://www.washingtontimes.com" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">WashingtonTimes</a>
-<a href="https://www.voakorea.com" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">VOA한국</a>
-            </div>
-
-            <div class="card bg-zinc-900 border border-zinc-800 rounded-3xl p-6 hover:border-cyan-500">
-                <div class="flex items-center gap-3 mb-4">
-                    <i class="NewsWorld text-3xl text-red-500"></i>
-                    <h3 class="font-semibold text-xl">NewsWorld</h3>
-                </div>
-<a href="https://www.scmp.com" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">SCMPostHK</a>
-<a href="https://www.straitstimes.com" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">StraitsTimesSG</a>
-<a href="https://www.arabnews.com" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">ArabNewsKSA</a>
-<a href="https://www.jpost.com" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">JerusalPostIS</a>
-<a href="https://krmnews.tv" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">KRMnewsIS</a>
-<a href="https://www.ft.com" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">FinancialTimesGB</a>
-<a href="https://www.telegraph.co.uk" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">TelegraphGB</a>
-<a href="https://www.thetimes.com" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">ThetimesGB</a>
-            </div>
-
-            <div class="card bg-zinc-900 border border-zinc-800 rounded-3xl p-6 hover:border-cyan-500">
-                <div class="flex items-center gap-3 mb-4">
-                    <i class="NewsWorld text-3xl text-red-500"></i>
-                    <h3 class="font-semibold text-xl">NewsIndustry</h3>
-                </div>
-<a href="https://www.digitimes.com" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">DigiTimesTW</a>
-<a href="https://www.nikkan.co.jp" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">日刊工業新聞</a>
-<a href="https://dempa-digital.com" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">電波新聞</a>
-<a href="https://news.shoninsha.co.jp" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">流通スーパー</a>
-
-            </div>
-
-            <div class="card bg-zinc-900 border border-zinc-800 rounded-3xl p-6 hover:border-cyan-500">
-                <div class="flex items-center gap-3 mb-4">
-                    <i class="NewsWorld text-3xl text-red-500"></i>
-                    <h3 class="font-semibold text-xl">Property</h3>
-                </div>
-<a href="https://www.homes.co.jp" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">Home's_LIFULL</a>
-<a href="https://www.kenbiya.com" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">健美家_LIFULL</a>
-<a href="https://nfm.nikkeibp.co.jp" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">日経不動産</a>
-<a href="https://www.youtube.com/@ddangzipgo" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">유튭:땅집고</a>
-<a href="https://www.youtube.com/@tv0505" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">유튭:표영호</a>
-            </div>
-
-            <div class="card bg-zinc-900 border border-zinc-800 rounded-3xl p-6 hover:border-cyan-500">
-                <div class="flex items-center gap-3 mb-4">
-                    <i class="NewsWorld text-3xl text-red-500"></i>
-                    <h3 class="font-semibold text-xl">LIFE,Crime</h3>
-                </div>
-<a href="https://www.youtube.com/@%EA%B9%80%EB%B3%B5%EC%A4%80%EC%9D%98%EC%82%AC%EA%B1%B4%EC%86%8D%EC%9C%BC%EB%A1%9C" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">김복준</a>
-<a href="https://www.youtube.com/@kimwontvtv" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">김원</a>
-<a href="https://www.youtube.com/@%EB%B0%95%EC%A2%85%EC%9D%B8%EC%9D%98%EB%95%85%EC%9D%98%EC%97%AD%EC%82%AC" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">박종인</a>
-<a href="https://www.youtube.com/@HANMOONCHULTV" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">한문철</a>
-            </div>
-
-            <div class="card bg-zinc-900 border border-zinc-800 rounded-3xl p-6 hover:border-cyan-500">
-                <div class="flex items-center gap-3 mb-4">
-                    <i class="Organizaton text-3xl text-red-500"></i>
-                    <h3 class="font-semibold text-xl">NGO,Law</h3>
-                </div>
-<a href="https://lawtalknews.co.kr" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">로톡뉴스</a>
-<a href="https://www.npknet.org" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">법치자유연대</a>
-            </div>
-
-            <div class="card bg-zinc-900 border border-zinc-800 rounded-3xl p-6 hover:border-cyan-500">
-                <div class="flex items-center gap-3 mb-4">
-                    <i class="NewsWorld text-3xl text-red-500"></i>
-                    <h3 class="font-semibold text-xl">Commentary</h3>
-                </div>
-<a href="https://rumble.com/LauraLoomer" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">Loomer</a>
-<a href="https://www.youtube.com/@TV-jd6wt" target="_blank" class="block text-gray-400 hover:text-white transition-colors py-1">이정훈</a>
-            </div>
-
-            <!-- 다른 카드들도 그대로 유지 -->
-        </div>
-
-        <footer class="text-center mt-16 text-xs text-gray-600">
-            <p>Dark Mode Bookmarks</p>
-        </footer>
+    <!-- 종합일간지 -->
+    <div class="section">
+      <div class="section-head">
+        <span class="num">01</span>
+        <h2>종합 일간지</h2>
+        <span class="desc">GENERAL DAILIES</span>
+      </div>
+      <div class="list">
+        <div class="entry"><a href="https://www.chosun.com" target="_blank" rel="noopener"><div class="headline">조선일보</div><div class="meta">chosun.com</div><div class="blurb">보수 성향의 대표적 종합 일간지</div></a></div>
+        <div class="entry"><a href="https://www.joongang.co.kr" target="_blank" rel="noopener"><div class="headline">중앙일보</div><div class="meta">joongang.co.kr</div><div class="blurb">종합 시사·경제 뉴스</div></a></div>
+        <div class="entry"><a href="https://www.donga.com" target="_blank" rel="noopener"><div class="headline">동아일보</div><div class="meta">donga.com</div><div class="blurb">1920년 창간, 국내 최장수 일간지 중 하나</div></a></div>
+        <div class="entry"><a href="https://www.hani.co.kr" target="_blank" rel="noopener"><div class="headline">한겨레</div><div class="meta">hani.co.kr</div><div class="blurb">진보 성향의 종합 일간지</div></a></div>
+        <div class="entry"><a href="https://www.khan.co.kr" target="_blank" rel="noopener"><div class="headline">경향신문</div><div class="meta">khan.co.kr</div><div class="blurb">진보 성향의 종합 일간지</div></a></div>
+        <div class="entry"><a href="https://www.hankookilbo.com" target="_blank" rel="noopener"><div class="headline">한국일보</div><div class="meta">hankookilbo.com</div><div class="blurb">중도 성향의 종합 일간지</div></a></div>
+      </div>
     </div>
 
-    <script>
-        // 세계 시간 업데이트 함수
-        function updateWorldTimes() {
-            const options = { 
-                year: 'numeric', 
-                month: '2-digit', 
-                day: '2-digit', 
-                hour: '2-digit', 
-                minute: '2-digit',
-                hour12: false 
-            };
+    <!-- 경제/증권 -->
+    <div class="section">
+      <div class="section-head">
+        <span class="num">02</span>
+        <h2>경제 · 증권</h2>
+        <span class="desc">BUSINESS & MARKETS</span>
+      </div>
+      <div class="list">
+        <div class="entry"><a href="https://www.mk.co.kr" target="_blank" rel="noopener"><div class="headline">매일경제</div><div class="meta">mk.co.kr</div><div class="blurb">경제 전문 종합지</div></a></div>
+        <div class="entry"><a href="https://www.hankyung.com" target="_blank" rel="noopener"><div class="headline">한국경제</div><div class="meta">hankyung.com</div><div class="blurb">경제·증권 전문 매체</div></a></div>
+        <div class="entry"><a href="https://www.sedaily.com" target="_blank" rel="noopener"><div class="headline">서울경제</div><div class="meta">sedaily.com</div><div class="blurb">경제·산업 뉴스</div></a></div>
+        <div class="entry"><a href="https://biz.chosun.com" target="_blank" rel="noopener"><div class="headline">조선비즈</div><div class="meta">biz.chosun.com</div><div class="blurb">경제·재테크 전문 섹션</div></a></div>
+        <div class="entry"><a href="https://www.edaily.co.kr" target="_blank" rel="noopener"><div class="headline">이데일리</div><div class="meta">edaily.co.kr</div><div class="blurb">증권·부동산 속보 중심</div></a></div>
+        <div class="entry"><a href="https://www.fnnews.com" target="_blank" rel="noopener"><div class="headline">파이낸셜뉴스</div><div class="meta">fnnews.com</div><div class="blurb">금융·경제 전문 매체</div></a></div>
+      </div>
+    </div>
 
-            // 뉴욕 (America/New_York)
-            const nyTime = new Intl.DateTimeFormat('ko-KR', { 
-                ...options, timeZone: 'America/New_York' 
-            }).format(new Date());
-            document.getElementById('ny-time').textContent = nyTime;
+    <!-- 방송/통신 -->
+    <div class="section">
+      <div class="section-head">
+        <span class="num">03</span>
+        <h2>방송 · 통신사</h2>
+        <span class="desc">BROADCAST & WIRE</span>
+      </div>
+      <div class="list">
+        <div class="entry"><a href="https://news.kbs.co.kr" target="_blank" rel="noopener"><div class="headline">KBS 뉴스</div><div class="meta">news.kbs.co.kr</div></a></div>
+        <div class="entry"><a href="https://imnews.imbc.com" target="_blank" rel="noopener"><div class="headline">MBC 뉴스</div><div class="meta">imnews.imbc.com</div></a></div>
+        <div class="entry"><a href="https://news.sbs.co.kr" target="_blank" rel="noopener"><div class="headline">SBS 뉴스</div><div class="meta">news.sbs.co.kr</div></a></div>
+        <div class="entry"><a href="https://news.jtbc.co.kr" target="_blank" rel="noopener"><div class="headline">JTBC 뉴스</div><div class="meta">news.jtbc.co.kr</div></a></div>
+        <div class="entry"><a href="https://www.yna.co.kr" target="_blank" rel="noopener"><div class="headline">연합뉴스</div><div class="meta">yna.co.kr</div></a></div>
+        <div class="entry"><a href="https://www.newsis.com" target="_blank" rel="noopener"><div class="headline">뉴시스</div><div class="meta">newsis.com</div></a></div>
+      </div>
+    </div>
 
-            // 도쿄 (Asia/Tokyo)
-            const tokyoTime = new Intl.DateTimeFormat('ko-KR', { 
-                ...options, timeZone: 'Asia/Tokyo' 
-            }).format(new Date());
-            document.getElementById('tokyo-time').textContent = tokyoTime;
+    <!-- IT/과학 -->
+    <div class="section">
+      <div class="section-head">
+        <span class="num">04</span>
+        <h2>IT · 과학</h2>
+        <span class="desc">TECH & SCIENCE</span>
+      </div>
+      <div class="list">
+        <div class="entry"><a href="https://zdnet.co.kr" target="_blank" rel="noopener"><div class="headline">지디넷코리아</div><div class="meta">zdnet.co.kr</div></a></div>
+        <div class="entry"><a href="https://www.etnews.com" target="_blank" rel="noopener"><div class="headline">전자신문</div><div class="meta">etnews.com</div></a></div>
+        <div class="entry"><a href="https://www.bloter.net" target="_blank" rel="noopener"><div class="headline">블로터</div><div class="meta">bloter.net</div></a></div>
+      </div>
+    </div>
 
-            // 런던 (Europe/London)
-            const londonTime = new Intl.DateTimeFormat('ko-KR', { 
-                ...options, timeZone: 'Europe/London' 
-            }).format(new Date());
-            document.getElementById('london-time').textContent = londonTime;
-        }
+  </div>
 
-        // 검색 기능 (이전과 동일)
-        const searchInput = document.getElementById('search');
-        const engineSelect = document.getElementById('searchEngine');
+  <footer>
+    신문가게 · 개인 링크 모음 페이지 · 각 콘텐츠의 저작권은 해당 언론사에 있습니다
+  </footer>
 
-        function performSearch() {
-            const query = searchInput.value.trim();
-            if (!query) return;
+</div>
 
-            let url = '';
-            switch(engineSelect.value) {
-                case 'google': url = `https://www.google.com/search?q=${encodeURIComponent(query)}`; break;
-                case 'YahooJP': url = `https://search.yahoo.co.jp/search?p=${encodeURIComponent(query)}`; break;
-                case 'duckduckgo': url = `https://duckduckgo.com/?q=${encodeURIComponent(query)}`; break;
-                case 'Yandex': url = `https://yandex.com/search/?text=${encodeURIComponent(query)}`; break;
-                default: url = `https://www.google.com/search?q=${encodeURIComponent(query)}`;
-            }
-            window.open(url, '_blank');
-            searchInput.value = '';
-        }
+<script>
+  function getPart(parts, type){
+    const p = parts.find(x => x.type === type);
+    return p ? p.value : '';
+  }
 
-        searchInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') performSearch();
-        });
+  function formatCityDateTime(timeZone){
+    const now = new Date();
+    const fmt = new Intl.DateTimeFormat('ko-KR', {
+      timeZone,
+      year: 'numeric',
+      month: 'numeric',
+      day: 'numeric',
+      weekday: 'long',
+      hour: '2-digit',
+      minute: '2-digit',
+      hourCycle: 'h23'
+    });
+    const parts = fmt.formatToParts(now);
+    const year = getPart(parts, 'year');
+    const month = getPart(parts, 'month');
+    const day = getPart(parts, 'day');
+    const weekday = getPart(parts, 'weekday');
+    const hour = getPart(parts, 'hour');
+    const minute = getPart(parts, 'minute');
+    return `${year}년 ${month}월 ${day}일 ${weekday} ${hour}시 ${minute}분`;
+  }
 
-        // 1분마다 시간 업데이트
-        setInterval(updateWorldTimes, 60000);
-        updateWorldTimes(); // 최초 실행
-    </script>
+  function updateClocks(){
+    const cities = [
+      { id: 'clock-kr', tz: 'Asia/Seoul' },
+      { id: 'clock-uk', tz: 'Europe/London' },
+      { id: 'clock-us', tz: 'America/New_York' }
+    ];
+    cities.forEach(({ id, tz }) => {
+      const el = document.getElementById(id);
+      if(!el) return;
+      const valueEl = el.querySelector('.value');
+      valueEl.textContent = formatCityDateTime(tz);
+    });
+  }
+
+  updateClocks();
+  setInterval(updateClocks, 60 * 1000);
+</script>
+
 </body>
 </html>
