@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>신문가게 — 오늘의 신문 가판대</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700;900&family=Nanum+Gothic:wght@400;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper: #f3ede0;
+    --paper-2: #eae2d0;
+    --ink: #1c1a17;
+    --ink-soft: #4a453d;
+    --masthead-red: #a5271f;
+    --stamp-blue: #2a4258;
+    --gold: #b8892b;
+    --rule: #c9bfa8;
+  }
+
+  *{ box-sizing:border-box; }
+
+  html,body{
+    margin:0;
+    padding:0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family:'Nanum Gothic', sans-serif;
+  }
+
+  body{
+    background-image:
+      radial-gradient(circle at 20% 10%, rgba(0,0,0,0.02), transparent 40%),
+      radial-gradient(circle at 80% 80%, rgba(0,0,0,0.02), transparent 40%);
+  }
+
+  a{ color:inherit; text-decoration:none; }
+
+  .wrap{
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 28px 24px 80px;
+  }
+
+  /* ===== Masthead ===== */
+  .masthead-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    flex-wrap: wrap;
+    gap: 8px 20px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    letter-spacing:0.04em;
+    color: var(--ink-soft);
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 8px;
+  }
+
+  .world-clocks{
+    display:flex;
+    flex-wrap: wrap;
+    gap: 6px 22px;
+  }
+
+  .world-clocks .clock{
+    white-space: nowrap;
+  }
+
+  .world-clocks .clock .city{
+    color: var(--masthead-red);
+    font-weight: 500;
+    margin-right: 6px;
+  }
+
+  .edition-tag{
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .masthead{
+    text-align:center;
+    padding: 26px 0 18px;
+    border-bottom: 4px double var(--ink);
+  }
+
+  .masthead .kicker{
+    font-family:'IBM Plex Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.35em;
+    color: var(--masthead-red);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .masthead h1{
+    font-family:'Noto Serif KR', serif;
+    font-weight: 900;
+    font-size: clamp(42px, 8vw, 84px);
+    margin: 0;
+    letter-spacing: 0.02em;
+    line-height: 1;
+  }
+
+  .masthead .sub{
+    margin-top: 12px;
+    font-family:'Noto Serif KR', serif;
+    font-size: 14px;
+    color: var(--ink-soft);
+    font-style: italic;
+  }
+
+  .search-bar{
+    margin: 20px auto 0;
+    max-width: 420px;
+    display:flex;
+    align-items:center;
+    gap: 0;
+    border: 1.5px solid var(--ink);
+    background: var(--paper-2);
+  }
+
+  .search-bar input[type="text"]{
+    flex:1;
+    min-width: 0;
+    padding: 10px 14px;
+    border: none;
+    background: transparent;
+    font-family:'Nanum Gothic', sans-serif;
+    font-size: 13.5px;
+    color: var(--ink);
+  }
+  .search-bar input[type="text"]::placeholder{
+    color: var(--ink-soft);
+    opacity: 0.7;
+  }
+  .search-bar input[type="text"]:focus{
+    outline: none;
+  }
+
+  .search-bar button{
+    display:flex;
+    align-items:center;
+    gap: 6px;
+    padding: 10px 16px;
+    border: none;
+    border-left: 1.5px solid var(--ink);
+    background: var(--ink);
+    color: var(--paper);
+    font-family:'IBM Plex Mono', monospace;
+    font-size: 11.5px;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+  }
+  .search-bar button:hover{ background: var(--masthead-red); }
+  .search-bar button svg{ width:13px; height:13px; }
+
+  .masthead-bottom{
+    display:flex;
+    justify-content:space-between;
+    font-family:'IBM Plex Mono', monospace;
+    font-size: 10.5px;
+    color: var(--ink-soft);
+    padding-top: 8px;
+    letter-spacing: 0.05em;
+  }
+
+  /* ===== Notice box ===== */
+  .notice{
+    margin: 26px 0 10px;
+    border: 1px solid var(--ink);
+    padding: 16px 18px;
+    background: var(--paper-2);
+    font-size: 13.5px;
+    line-height: 1.65;
+    color: var(--ink-soft);
+    position: relative;
+  }
+  .notice::before{
+    content: "편집자 주";
+    position:absolute;
+    top:-11px;
+    left: 16px;
+    background: var(--paper);
+    padding: 0 8px;
+    font-family:'Noto Serif KR', serif;
+    font-weight:700;
+    font-size: 12px;
+    color: var(--masthead-red);
+  }
+
+  /* ===== Sections row layout: 3 per row, then wraps below ===== */
+  .sections-grid{
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 32px;
+    row-gap: 40px;
+    margin-top: 30px;
+  }
+
+  .section{
+    border-left: 1px solid var(--rule);
+    padding-left: 24px;
+  }
+  .sections-grid > .section:nth-child(3n+1){
+    border-left: none;
+    padding-left: 0;
+  }
+
+  .section-head{
+    display:flex;
+    align-items:baseline;
+    flex-wrap: wrap;
+    gap: 10px;
+    border-bottom: 3px solid var(--ink);
+    padding-bottom: 8px;
+    margin-bottom: 18px;
+  }
+
+  .section-head .num{
+    font-family:'IBM Plex Mono', monospace;
+    font-size: 12px;
+    color: var(--paper);
+    background: var(--stamp-blue);
+    padding: 2px 8px;
+  }
+
+  .section-head h2{
+    font-family:'Noto Serif KR', serif;
+    font-weight: 700;
+    font-size: 20px;
+    margin: 0;
+  }
+
+  .section-head .desc{
+    font-size: 10.5px;
+    color: var(--ink-soft);
+    margin-left: auto;
+    font-family:'IBM Plex Mono', monospace;
+  }
+
+  .list{
+    display:flex;
+    flex-direction: column;
+  }
+
+  .entry{
+    padding: 14px 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .entry:last-child{ border-bottom:none; }
+
+  .entry a{
+    display:block;
+  }
+
+  .entry .headline{
+    font-family:'Noto Serif KR', serif;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 1.35;
+    transition: color .15s ease;
+  }
+  .entry a:hover .headline{ color: var(--masthead-red); }
+
+  .entry .meta{
+    margin-top: 5px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size: 10.5px;
+    color: var(--ink-soft);
+    letter-spacing: 0.03em;
+  }
+
+  .entry .blurb{
+    margin-top: 6px;
+    font-size: 12.5px;
+    color: var(--ink-soft);
+    line-height: 1.5;
+  }
+
+  footer{
+    margin-top: 60px;
+    border-top: 4px double var(--ink);
+    padding-top: 16px;
+    text-align:center;
+    font-family:'IBM Plex Mono', monospace;
+    font-size: 10.5px;
+    color: var(--ink-soft);
+    letter-spacing: 0.08em;
+  }
+
+  @media (max-width: 980px){
+    .sections-grid{ grid-template-columns: repeat(2, 1fr); }
+    .sections-grid > .section:nth-child(3n+1){ border-left: 1px solid var(--rule); padding-left: 24px; }
+    .sections-grid > .section:nth-child(2n+1){ border-left: none; padding-left: 0; }
+  }
+
+  @media (max-width: 640px){
+    .sections-grid{ grid-template-columns: 1fr; }
+    .sections-grid > .section{ border-left:none; padding-left:0; border-top:1px solid var(--rule); padding-top:20px; }
+    .sections-grid > .section:first-child{ border-top:none; padding-top:0; }
+    .masthead h1{ font-size: 46px; }
+  }
+
+  :focus-visible{
+    outline: 2px solid var(--masthead-red);
+    outline-offset: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .entry .headline{ transition:none; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="masthead-top">
+    <div class="world-clocks">
+      <span class="clock" id="clock-kr"><span class="city">서울</span><span class="value">—</span></span>
+      <span class="clock" id="clock-uk"><span class="city">런던</span><span class="value">—</span></span>
+      <span class="clock" id="clock-us"><span class="city">워싱턴 D.C.</span><span class="value">—</span></span>
+    </div>
+    <span class="edition-tag">가판대 정가 · 무료 열람</span>
+  </div>
+
+  <div class="masthead">
+    <div class="kicker">Curated Link Newsstand</div>
+    <h1>신 문 가 게</h1>
+    <div class="sub">— 오늘도 좋은 소식만 골라 놓았습니다 —</div>
+    <form class="search-bar" action="https://www.google.com/search" method="GET" target="_blank">
+      <input type="text" name="q" placeholder="구글에서 검색어를 입력하세요" autocomplete="off">
+      <button type="submit">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        검색
+      </button>
+    </form>
+  </div>
+
+  <div class="masthead-bottom">
+    <span>제 1 호 · 링크 모음판</span>
+    <span>NEWSSTAND EDITION</span>
+  </div>
+
+  <div class="notice">
+    이 페이지는 여러 언론사·매체의 링크를 한곳에 모아둔 개인용 뉴스 가판대입니다.
+    아래 진열대에서 원하는 신문을 골라 클릭하면 해당 사이트로 이동합니다.
+  </div>
+
+  <div class="sections-grid">
+
+    <!-- 종합일간지 -->
+    <div class="section">
+      <div class="section-head">
+        <span class="num">01</span>
+        <h2>종합 일간지</h2>
+        <span class="desc">GENERAL DAILIES</span>
+      </div>
+      <div class="list">
+        <div class="entry"><a href="https://www.chosun.com" target="_blank" rel="noopener"><div class="headline">조선일보</div><div class="meta">chosun.com</div><div class="blurb">보수 성향의 대표적 종합 일간지</div></a></div>
+        <div class="entry"><a href="https://www.joongang.co.kr" target="_blank" rel="noopener"><div class="headline">중앙일보</div><div class="meta">joongang.co.kr</div><div class="blurb">종합 시사·경제 뉴스</div></a></div>
+        <div class="entry"><a href="https://www.donga.com" target="_blank" rel="noopener"><div class="headline">동아일보</div><div class="meta">donga.com</div><div class="blurb">1920년 창간, 국내 최장수 일간지 중 하나</div></a></div>
+        <div class="entry"><a href="https://www.hani.co.kr" target="_blank" rel="noopener"><div class="headline">한겨레</div><div class="meta">hani.co.kr</div><div class="blurb">진보 성향의 종합 일간지</div></a></div>
+        <div class="entry"><a href="https://www.khan.co.kr" target="_blank" rel="noopener"><div class="headline">경향신문</div><div class="meta">khan.co.kr</div><div class="blurb">진보 성향의 종합 일간지</div></a></div>
+        <div class="entry"><a href="https://www.hankookilbo.com" target="_blank" rel="noopener"><div class="headline">한국일보</div><div class="meta">hankookilbo.com</div><div class="blurb">중도 성향의 종합 일간지</div></a></div>
+      </div>
+    </div>
+
+    <!-- 경제/증권 -->
+    <div class="section">
+      <div class="section-head">
+        <span class="num">02</span>
+        <h2>경제 · 증권</h2>
+        <span class="desc">BUSINESS & MARKETS</span>
+      </div>
+      <div class="list">
+        <div class="entry"><a href="https://www.mk.co.kr" target="_blank" rel="noopener"><div class="headline">매일경제</div><div class="meta">mk.co.kr</div><div class="blurb">경제 전문 종합지</div></a></div>
+        <div class="entry"><a href="https://www.hankyung.com" target="_blank" rel="noopener"><div class="headline">한국경제</div><div class="meta">hankyung.com</div><div class="blurb">경제·증권 전문 매체</div></a></div>
+        <div class="entry"><a href="https://www.sedaily.com" target="_blank" rel="noopener"><div class="headline">서울경제</div><div class="meta">sedaily.com</div><div class="blurb">경제·산업 뉴스</div></a></div>
+        <div class="entry"><a href="https://biz.chosun.com" target="_blank" rel="noopener"><div class="headline">조선비즈</div><div class="meta">biz.chosun.com</div><div class="blurb">경제·재테크 전문 섹션</div></a></div>
+        <div class="entry"><a href="https://www.edaily.co.kr" target="_blank" rel="noopener"><div class="headline">이데일리</div><div class="meta">edaily.co.kr</div><div class="blurb">증권·부동산 속보 중심</div></a></div>
+        <div class="entry"><a href="https://www.fnnews.com" target="_blank" rel="noopener"><div class="headline">파이낸셜뉴스</div><div class="meta">fnnews.com</div><div class="blurb">금융·경제 전문 매체</div></a></div>
+      </div>
+    </div>
+
+    <!-- 방송/통신 -->
+    <div class="section">
+      <div class="section-head">
+        <span class="num">03</span>
+        <h2>방송 · 통신사</h2>
+        <span class="desc">BROADCAST & WIRE</span>
+      </div>
+      <div class="list">
+        <div class="entry"><a href="https://news.kbs.co.kr" target="_blank" rel="noopener"><div class="headline">KBS 뉴스</div><div class="meta">news.kbs.co.kr</div></a></div>
+        <div class="entry"><a href="https://imnews.imbc.com" target="_blank" rel="noopener"><div class="headline">MBC 뉴스</div><div class="meta">imnews.imbc.com</div></a></div>
+        <div class="entry"><a href="https://news.sbs.co.kr" target="_blank" rel="noopener"><div class="headline">SBS 뉴스</div><div class="meta">news.sbs.co.kr</div></a></div>
+        <div class="entry"><a href="https://news.jtbc.co.kr" target="_blank" rel="noopener"><div class="headline">JTBC 뉴스</div><div class="meta">news.jtbc.co.kr</div></a></div>
+        <div class="entry"><a href="https://www.yna.co.kr" target="_blank" rel="noopener"><div class="headline">연합뉴스</div><div class="meta">yna.co.kr</div></a></div>
+        <div class="entry"><a href="https://www.newsis.com" target="_blank" rel="noopener"><div class="headline">뉴시스</div><div class="meta">newsis.com</div></a></div>
+      </div>
+    </div>
+
+    <!-- IT/과학 -->
+    <div class="section">
+      <div class="section-head">
+        <span class="num">04</span>
+        <h2>IT · 과학</h2>
+        <span class="desc">TECH & SCIENCE</span>
+      </div>
+      <div class="list">
+        <div class="entry"><a href="https://zdnet.co.kr" target="_blank" rel="noopener"><div class="headline">지디넷코리아</div><div class="meta">zdnet.co.kr</div></a></div>
+        <div class="entry"><a href="https://www.etnews.com" target="_blank" rel="noopener"><div class="headline">전자신문</div><div class="meta">etnews.com</div></a></div>
+        <div class="entry"><a href="https://www.bloter.net" target="_blank" rel="noopener"><div class="headline">블로터</div><div class="meta">bloter.net</div></a></div>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    신문가게 · 개인 링크 모음 페이지 · 각 콘텐츠의 저작권은 해당 언론사에 있습니다
+  </footer>
+
+</div>
+
+<script>
+  function getPart(parts, type){
+    const p = parts.find(x => x.type === type);
+    return p ? p.value : '';
+  }
+
+  function formatCityDateTime(timeZone){
+    const now = new Date();
+    const fmt = new Intl.DateTimeFormat('ko-KR', {
+      timeZone,
+      year: 'numeric',
+      month: 'numeric',
+      day: 'numeric',
+      weekday: 'long',
+      hour: '2-digit',
+      minute: '2-digit',
+      hourCycle: 'h23'
+    });
+    const parts = fmt.formatToParts(now);
+    const year = getPart(parts, 'year');
+    const month = getPart(parts, 'month');
+    const day = getPart(parts, 'day');
+    const weekday = getPart(parts, 'weekday');
+    const hour = getPart(parts, 'hour');
+    const minute = getPart(parts, 'minute');
+    return `${year}년 ${month}월 ${day}일 ${weekday} ${hour}시 ${minute}분`;
+  }
+
+  function updateClocks(){
+    const cities = [
+      { id: 'clock-kr', tz: 'Asia/Seoul' },
+      { id: 'clock-uk', tz: 'Europe/London' },
+      { id: 'clock-us', tz: 'America/New_York' }
+    ];
+    cities.forEach(({ id, tz }) => {
+      const el = document.getElementById(id);
+      if(!el) return;
+      const valueEl = el.querySelector('.value');
+      valueEl.textContent = formatCityDateTime(tz);
+    });
+  }
+
+  updateClocks();
+  setInterval(updateClocks, 60 * 1000);
+</script>
+
+</body>
+</html>
