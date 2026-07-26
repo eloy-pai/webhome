@@ -165,6 +165,16 @@
     letter-spacing: 0.05em;
   }
 
+  .masthead-bottom a{
+    color: var(--ink-soft);
+    border-bottom: 1px solid var(--rule);
+    transition: color .15s ease, border-color .15s ease;
+  }
+  .masthead-bottom a:hover{
+    color: var(--masthead-red);
+    border-color: var(--masthead-red);
+  }
+
   /* ===== Notice box ===== */
   .notice{
     margin: 26px 0 10px;
@@ -339,6 +349,7 @@
 
   <div class="masthead-bottom">
     <span>제 1 호 · 링크 모음판</span>
+    <a href="index.html">홈으로</a>
     <span>NEWSSTAND EDITION</span>
   </div>
 
