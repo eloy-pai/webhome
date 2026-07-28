@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Watch List — 유튜브 채널 모음</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #F4F5F7;
+    --surface: #FFFFFF;
+    --border: #E3E5E9;
+    --text: #15171B;
+    --text-soft: #6B7078;
+    --accent: #E63946;
+    --accent-soft: #FBE7E8;
+    --radius: 14px;
+    --max-w: 1080px;
+  }
+
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior: auto; }
+    *{ animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  }
+
+  body{
+    margin:0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', -apple-system, sans-serif;
+    line-height: 1.5;
+  }
+
+  a{ color: inherit; text-decoration: none; }
+
+  ::selection{ background: var(--accent-soft); color: var(--accent); }
+
+  :focus-visible{
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  /* ---------- Header ---------- */
+  header{
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: rgba(244,245,247,0.85);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .header-inner{
+    max-width: var(--max-w);
+    margin: 0 auto;
+    padding: 22px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .brand{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .brand-mark{
+    width: 30px; height: 30px;
+    border-radius: 8px;
+    background: var(--text);
+    position: relative;
+    flex-shrink: 0;
+  }
+  .brand-mark::after{
+    content:"";
+    position: absolute;
+    top:50%; left:53%;
+    transform: translate(-50%,-50%);
+    border-style: solid;
+    border-width: 6px 0 6px 9px;
+    border-color: transparent transparent transparent var(--accent);
+  }
+
+  .brand-text{
+    font-family:'Manrope', sans-serif;
+    font-weight: 800;
+    font-size: 1.05rem;
+    letter-spacing: -0.01em;
+  }
+  .brand-text span{ color: var(--text-soft); font-weight: 500; }
+
+  .search-wrap{
+    position: relative;
+    width: 260px;
+    max-width: 100%;
+  }
+  #search{
+    width:100%;
+    padding: 10px 14px 10px 36px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    font-family:'Inter',sans-serif;
+    font-size: 0.9rem;
+    color: var(--text);
+    transition: border-color .15s ease, box-shadow .15s ease;
+  }
+  #search:focus{
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-soft);
+  }
+  .search-wrap::before{
+    content:"";
+    position:absolute;
+    left: 13px; top: 50%;
+    width: 12px; height: 12px;
+    transform: translateY(-50%);
+    border: 2px solid var(--text-soft);
+    border-radius: 50%;
+    pointer-events:none;
+  }
+  .search-wrap::after{
+    content:"";
+    position:absolute;
+    left: 22px; top: 63%;
+    width: 6px; height: 2px;
+    background: var(--text-soft);
+    transform: rotate(45deg);
+    pointer-events:none;
+  }
+
+  /* ---------- Quick nav ---------- */
+  nav.quicknav{
+    max-width: var(--max-w);
+    margin: 0 auto;
+    padding: 0 24px 18px;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  nav.quicknav a{
+    font-family:'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.02em;
+    padding: 6px 12px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    color: var(--text-soft);
+    background: var(--surface);
+    transition: color .15s ease, border-color .15s ease, background .15s ease;
+    white-space: nowrap;
+  }
+  nav.quicknav a:hover{
+    color: var(--accent);
+    border-color: var(--accent);
+    background: var(--accent-soft);
+  }
+
+  /* ---------- Layout ---------- */
+  main{
+    max-width: var(--max-w);
+    margin: 0 auto;
+    padding: 12px 24px 80px;
+  }
+
+  .intro{
+    padding: 10px 0 28px;
+    max-width: 560px;
+  }
+  .intro h1{
+    font-family:'Manrope', sans-serif;
+    font-weight: 800;
+    font-size: clamp(1.6rem, 3vw, 2.1rem);
+    letter-spacing: -0.02em;
+    margin: 0 0 8px;
+  }
+  .intro p{
+    color: var(--text-soft);
+    font-size: 0.95rem;
+    margin: 0;
+  }
+
+  .grid{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+  }
+
+  .category{
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    scroll-margin-top: 110px;
+  }
+
+  .category-head{
+    display:flex;
+    align-items: center;
+    gap: 10px;
+    padding: 16px 18px;
+    border-bottom: 1px solid var(--border);
+  }
+  .category-dot{
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+    flex-shrink: 0;
+  }
+  .category-head h2{
+    font-family:'Manrope', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    margin: 0;
+    letter-spacing: -0.01em;
+  }
+  .category-count{
+    margin-left: auto;
+    font-family:'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--text-soft);
+  }
+
+  ul.channels{
+    list-style: none;
+    margin: 0;
+    padding: 6px;
+  }
+
+  .channels li a{
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 12px;
+    border-radius: 10px;
+    transition: background .12s ease, padding-left .12s ease;
+  }
+  .channels li a:hover,
+  .channels li a:focus-visible{
+    background: var(--accent-soft);
+  }
+
+  .play{
+    width: 0; height: 0;
+    border-style: solid;
+    border-width: 5px 0 5px 8px;
+    border-color: transparent transparent transparent var(--border);
+    flex-shrink: 0;
+    transition: border-color .12s ease;
+  }
+  .channels li a:hover .play{
+    border-color: transparent transparent transparent var(--accent);
+  }
+
+  .channel-info{
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+  .channel-name{
+    font-size: 0.92rem;
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .channel-desc{
+    font-size: 0.78rem;
+    color: var(--text-soft);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .no-result{
+    display:none;
+    text-align:center;
+    color: var(--text-soft);
+    font-size: 0.9rem;
+    padding: 60px 0;
+  }
+
+  footer{
+    max-width: var(--max-w);
+    margin: 0 auto;
+    padding: 0 24px 60px;
+    color: var(--text-soft);
+    font-size: 0.8rem;
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+  footer code{
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 1px 6px;
+    border-radius: 4px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="brand">
+      <div class="brand-mark"></div>
+      <div class="brand-text">MY WATCH LIST <span>· 채널 모음</span></div>
+    </div>
+    <div class="search-wrap">
+      <input type="text" id="search" placeholder="채널 이름 검색..." autocomplete="off">
+    </div>
+  </div>
+  <nav class="quicknav" id="quicknav">
+    <!-- 카테고리 앵커: 아래 카테고리와 id를 맞춰서 자유롭게 추가/삭제하세요 -->
+    <a href="#stock">증권</a>
+    <a href="#incident">사건사고</a>
+    <a href="#soccer">축구</a>
+    <a href="#politics">정치시사</a>
+  </nav>
+</header>
+
+<main>
+  <div class="intro">
+    <h1>자주 보는 채널을 한곳에</h1>
+    <p>분야별로 정리한 유튜브 채널 모음입니다. 카드마다 채널을 자유롭게 추가·삭제하세요.</p>
+    <a href="index.html">신문가게로 이동하기</a>
+  </div>
+
+  <div class="grid" id="grid">
+
+    <!-- ========== 증권 ========== -->
+    <section class="category" id="stock">
+      <div class="category-head">
+        <span class="category-dot"></span>
+        <h2>증권</h2>
+        <span class="category-count">3</span>
+      </div>
+      <ul class="channels">
+        <li><a href="https://www.youtube.com/@koreanstockrider" target="_blank" rel="noopener">
+          <span class="play"></span>
+          <span class="channel-info">
+            <span class="channel-name">증시각도기TV</span>
+            <span class="channel-desc">미국·한국 증시 분석</span>
+          </span>
+        </a></li>
+        <li><a href="https://www.youtube.com/@%EA%B9%80%EB%AF%BC%EC%88%98%EC%9D%98%EA%B0%99%EC%9D%B4%ED%88%AC%EC%9E%90" target="_blank" rel="noopener">
+          <span class="play"></span>
+          <span class="channel-info">
+            <span class="channel-name">김민수의 같이투자</span>
+            <span class="channel-desc">주도주 · 종목 분석</span>
+          </span>
+        </a></li>
+        <li><a href="https://www.youtube.com/@rsangmoo" target="_blank" rel="noopener">
+          <span class="play"></span>
+          <span class="channel-info">
+            <span class="channel-name">알상무</span>
+            <span class="channel-desc">투자 콘텐츠</span>
+          </span>
+        </a></li>
+      </ul>
+    </section>
+
+    <!-- ========== 사건사고 ========== -->
+    <section class="category" id="incident">
+      <div class="category-head">
+        <span class="category-dot"></span>
+        <h2>사건사고</h2>
+        <span class="category-count">3</span>
+      </div>
+      <ul class="channels">
+        <li><a href="https://www.youtube.com/@HANMOONCHULTV" target="_blank" rel="noopener">
+          <span class="play"></span>
+          <span class="channel-info">
+            <span class="channel-name">한문철 TV</span>
+            <span class="channel-desc">교통사고 과실비율 분석</span>
+          </span>
+        </a></li>
+        <li><a href="https://www.youtube.com/@%EA%B9%80%EB%B3%B5%EC%A4%80%EC%9D%98%EC%82%AC%EA%B1%B4%EC%86%8D%EC%9C%BC%EB%A1%9C" target="_blank" rel="noopener">
+          <span class="play"></span>
+          <span class="channel-info">
+            <span class="channel-name">김복준의 사건속으로</span>
+            <span class="channel-desc">범죄 사건 분석</span>
+          </span>
+        </a></li>
+        <li><a href="https://www.youtube.com/@kimwontvtv" target="_blank" rel="noopener">
+          <span class="play"></span>
+          <span class="channel-info">
+            <span class="channel-name">KimwonTV</span>
+            <span class="channel-desc">미제사건 · 미스터리</span>
+          </span>
+        </a></li>
+      </ul>
+    </section>
+
+    <!-- ========== 축구 ========== -->
+    <section class="category" id="soccer">
+      <div class="category-head">
+        <span class="category-dot"></span>
+        <h2>축구</h2>
+        <span class="category-count">4</span>
+      </div>
+      <ul class="channels">
+        <li><a href="https://www.youtube.com/@again0joo" target="_blank" rel="noopener">
+          <span class="play"></span>
+          <span class="channel-info">
+            <span class="channel-name">송영주의 '또영주TV'</span>
+            <span class="channel-desc">라리가 · 유럽축구 해설</span>
+          </span>
+        </a></li>
+        <li><a href="https://www.youtube.com/@onetwopunchplus" target="_blank" rel="noopener">
+          <span class="play"></span>
+          <span class="channel-info">
+            <span class="channel-name">원투펀치 Plus</span>
+            <span class="channel-desc">EPL · 축구 콘텐츠</span>
+          </span>
+        </a></li>
+        <li><a href="https://www.youtube.com/@%EB%BD%88%EB%A6%ACTV" target="_blank" rel="noopener">
+          <span class="play"></span>
+          <span class="channel-info">
+            <span class="channel-name">서형욱의 뽈리TV</span>
+            <span class="channel-desc">축구 해설 · 분석</span>
+          </span>
+        </a></li>
+        <li><a href="https://www.youtube.com/@redjaemin" target="_blank" rel="noopener">
+          <span class="play"></span>
+          <span class="channel-info">
+            <span class="channel-name">레드재민TV</span>
+            <span class="channel-desc">축구 토크</span>
+          </span>
+        </a></li>
+      </ul>
+    </section>
+
+    <!-- ========== 정치시사 ========== -->
+    <section class="category" id="politics">
+      <div class="category-head">
+        <span class="category-dot"></span>
+        <h2>정치시사</h2>
+        <span class="category-count">3</span>
+      </div>
+      <ul class="channels">
+        <li><a href="https://rumble.com/LauraLoomer" target="_blank" rel="noopener">
+          <span class="play"></span>
+          <span class="channel-info">
+            <span class="channel-name">Laura Loomer</span>
+            <span class="channel-desc">미국 시사 · 정치</span>
+          </span>
+        </a></li>
+        <li><a href="https://www.youtube.com/@MSTV1234" target="_blank" rel="noopener">
+          <span class="play"></span>
+          <span class="channel-info">
+            <span class="channel-name">마이클심(MS)TV</span>
+            <span class="channel-desc">미국 시사 · 정치</span>
+          </span>
+        </a></li>
+        <li><a href="https://www.youtube.com/@%EC%9B%90%EC%9A%A9%EC%84%9D%EC%9D%98%EC%A7%84%EC%8B%A4%EC%A0%95%EC%B9%98" target="_blank" rel="noopener">
+          <span class="play"></span>
+          <span class="channel-info">
+            <span class="channel-name">원용석의 진실정치</span>
+            <span class="channel-desc">미국 정치 분석</span>
+          </span>
+        </a></li>
+        <li><a href="https://www.youtube.com/@TV-jd6wt" target="_blank" rel="noopener">
+          <span class="play"></span>
+          <span class="channel-info">
+            <span class="channel-name">이정훈TV</span>
+            <span class="channel-desc">시사 · 정치 해설</span>
+          </span>
+        </a></li>
+      </ul>
+    </section>
+
+  </div>
+
+  <p class="no-result" id="noResult">검색 결과가 없습니다.</p>
+</main>
+
+<footer>
+  채널 추가 방법: <code>&lt;li&gt;</code> 블록을 복사해서 <code>href</code>와 채널 이름을 바꾸세요. 새 카테고리는 <code>&lt;section class="category"&gt;</code> 블록 전체를 복사한 뒤 상단 <code>quicknav</code>에 링크를 추가하면 됩니다.
+</footer>
+
+<script>
+  const search = document.getElementById('search');
+  const categories = document.querySelectorAll('.category');
+  const noResult = document.getElementById('noResult');
+
+  search.addEventListener('input', () => {
+    const q = search.value.trim().toLowerCase();
+    let anyVisible = false;
+
+    categories.forEach(cat => {
+      let catHasMatch = false;
+      cat.querySelectorAll('li').forEach(li => {
+        const name = li.querySelector('.channel-name').textContent.toLowerCase();
+        const desc = li.querySelector('.channel-desc')?.textContent.toLowerCase() || '';
+        const match = !q || name.includes(q) || desc.includes(q);
+        li.style.display = match ? '' : 'none';
+        if (match) catHasMatch = true;
+      });
+      cat.style.display = catHasMatch ? '' : 'none';
+      if (catHasMatch) anyVisible = true;
+    });
+
+    noResult.style.display = anyVisible ? 'none' : 'block';
+  });
+</script>
+
+</body>
+</html>
