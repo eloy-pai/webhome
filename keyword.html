@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>뉴스 키워드 검색 데스크</title>
+<style>
+  :root{
+    --paper:#efece3;
+    --ink:#1c1a17;
+    --rule:#c9c2b2;
+    --wire:#8a3324;
+    --wire-dim:#b85c48;
+    --panel:#f7f5ee;
+    --stamp:#2f4d3a;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family: "Iowan Old Style","Noto Serif KR", Georgia, serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .masthead{
+    border-bottom:4px double var(--ink);
+    padding:28px 24px 14px;
+    text-align:center;
+    position:relative;
+  }
+  .masthead .kicker{
+    font-family: "Courier New", monospace;
+    letter-spacing:.3em;
+    font-size:11px;
+    text-transform:uppercase;
+    color:var(--wire);
+  }
+  .masthead h1{
+    font-size:clamp(28px,5vw,48px);
+    margin:6px 0 4px;
+    letter-spacing:.01em;
+    font-weight:700;
+  }
+  .masthead .dateline{
+    font-family:"Courier New", monospace;
+    font-size:12px;
+    color:#5c574c;
+    display:flex;
+    justify-content:center;
+    gap:18px;
+    flex-wrap:wrap;
+  }
+  #liveClock{font-variant-numeric: tabular-nums;}
+
+  .toolbar{
+    max-width:1100px;
+    margin:20px auto 0;
+    padding:0 20px;
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .search-wrap{
+    flex:1;
+    min-width:240px;
+    position:relative;
+  }
+  .search-wrap input{
+    width:100%;
+    padding:11px 14px 11px 34px;
+    font-family:"Courier New", monospace;
+    font-size:14px;
+    background:var(--panel);
+    border:1px solid var(--ink);
+    color:var(--ink);
+    outline:none;
+  }
+  .search-wrap input::placeholder{color:#9a9484;}
+  .search-wrap::before{
+    content:"⌕";
+    position:absolute;
+    left:12px; top:50%;
+    transform:translateY(-50%);
+    font-size:16px;
+    color:var(--wire);
+  }
+  .count-badge{
+    font-family:"Courier New", monospace;
+    font-size:12px;
+    color:#5c574c;
+    white-space:nowrap;
+    padding:0 4px;
+  }
+
+  main{
+    max-width:1100px;
+    margin:26px auto 60px;
+    padding:0 20px;
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(240px,1fr));
+    gap:0;
+    border-top:1px solid var(--ink);
+    border-left:1px solid var(--ink);
+  }
+  section.column{
+    border-right:1px solid var(--ink);
+    border-bottom:1px solid var(--ink);
+    background:var(--panel);
+    display:flex;
+    flex-direction:column;
+  }
+  section.column h2{
+    font-family:"Courier New", monospace;
+    font-size:13px;
+    letter-spacing:.15em;
+    text-transform:uppercase;
+    margin:0;
+    padding:12px 16px;
+    background:var(--ink);
+    color:var(--paper);
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+  }
+  section.column h2 .n{
+    color:var(--wire-dim);
+    font-weight:normal;
+  }
+  ul.klist{
+    list-style:none;
+    margin:0;
+    padding:0;
+  }
+  ul.klist li{
+    border-bottom:1px solid var(--rule);
+  }
+  ul.klist li:last-child{border-bottom:none;}
+  ul.klist a{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:8px;
+    padding:11px 16px;
+    color:var(--ink);
+    text-decoration:none;
+    font-size:15px;
+    transition:background .12s ease, padding-left .12s ease;
+  }
+  ul.klist a:hover{
+    background:#e4dfd0;
+    padding-left:20px;
+  }
+  ul.klist a .lang-tag{
+    font-family:"Courier New", monospace;
+    font-size:10px;
+    letter-spacing:.05em;
+    color:#8a8474;
+    border:1px solid var(--rule);
+    padding:1px 5px;
+    flex-shrink:0;
+  }
+  ul.klist a:hover .lang-tag{
+    color:var(--wire);
+    border-color:var(--wire-dim);
+  }
+  ul.klist li.hidden{display:none;}
+  .empty-msg{
+    padding:16px;
+    font-family:"Courier New",monospace;
+    font-size:12px;
+    color:#9a9484;
+    display:none;
+  }
+
+  footer{
+    max-width:1100px;
+    margin:0 auto 40px;
+    padding:14px 20px 0;
+    border-top:1px solid var(--rule);
+    font-family:"Courier New", monospace;
+    font-size:11px;
+    color:#8a8474;
+    text-align:center;
+  }
+</style>
+</head>
+<body>
+
+<div class="masthead">
+  <div class="kicker">Newswire Desk · Keyword Index</div>
+  <h1>뉴스 키워드 검색</h1>
+  <div class="dateline">
+    <span id="liveDate"></span>
+    <span id="liveClock"></span>
+    <span id="totalCount"></span>
+  </div>
+</div>
+
+<div class="toolbar">
+  <div class="search-wrap">
+    <input type="text" id="filterInput" placeholder="키워드 필터링... (예: 반도체, sea)" autocomplete="off">
+  </div>
+  <div class="count-badge" id="visibleCount"></div>
+</div>
+
+<main id="columns"></main>
+
+<footer>클릭 시 Google 뉴스 검색 결과가 새 탭에서 열립니다 · 한국어 키워드는 KR 판, 영문 키워드는 US 판으로 검색됩니다</footer>
+
+<script>
+const DATA = {
+  "기업 키워드": { lang: "ko", keywords: ["공개매수","인적분할","물적분할","합병","매각","유상증자","홈플러스","보스턴다이나믹스","현대엔지니어링","중앙홀딩스","사모펀드 IMM","사모펀드 MBK","한앤컴퍼니"] },
+  "경제/산업 키워드": { lang: "ko", keywords: ["인공지능","데이터센터","원자력","자율주행","스테이블코인","HBM","메모리 반도체","액추에이터","해상풍력","소비자물가","생산자물가","관세","한국은행","산업은행","월 수출","공시지가"] },
+  "일반 키워드": { lang: "ko", keywords: ["광주공항","대구공항","새만금","횡령","배임","별세","부고"] },
+  "Keyword": { lang: "en", keywords: ["strait hormuz","red sea","black sea","suez canal","panama canal","strait malacca"] }
+};
+
+function buildUrl(keyword, lang){
+  const q = encodeURIComponent(keyword);
+  if(lang === "en"){
+    return `https://news.google.com/search?q=${q}&hl=en&gl=US&ceid=US:en`;
+  }
+  return `https://news.google.com/search?q=${q}&hl=ko&gl=KR&ceid=KR:ko`;
+}
+
+const columnsEl = document.getElementById('columns');
+let totalKeywords = 0;
+
+Object.entries(DATA).forEach(([category, info]) => {
+  totalKeywords += info.keywords.length;
+
+  const section = document.createElement('section');
+  section.className = 'column';
+
+  const h2 = document.createElement('h2');
+  h2.innerHTML = `<span>${category}</span><span class="n">${info.keywords.length}</span>`;
+  section.appendChild(h2);
+
+  const ul = document.createElement('ul');
+  ul.className = 'klist';
+
+  info.keywords.forEach(kw => {
+    const li = document.createElement('li');
+    li.dataset.keyword = kw.toLowerCase();
+
+    const a = document.createElement('a');
+    a.href = buildUrl(kw, info.lang);
+    a.target = '_blank';
+    a.rel = 'noopener noreferrer';
+    a.innerHTML = `<span>🔍 ${kw}</span><span class="lang-tag">${info.lang.toUpperCase()}</span>`;
+
+    li.appendChild(a);
+    ul.appendChild(li);
+  });
+
+  const emptyMsg = document.createElement('div');
+  emptyMsg.className = 'empty-msg';
+  emptyMsg.textContent = '일치하는 키워드 없음';
+
+  section.appendChild(ul);
+  section.appendChild(emptyMsg);
+  columnsEl.appendChild(section);
+});
+
+document.getElementById('totalCount').textContent = `총 ${totalKeywords}개 키워드`;
+
+function updateClock(){
+  const now = new Date();
+  document.getElementById('liveDate').textContent = now.toLocaleDateString('ko-KR', { year:'numeric', month:'2-digit', day:'2-digit', weekday:'short' });
+  document.getElementById('liveClock').textContent = now.toLocaleTimeString('ko-KR', { hour:'2-digit', minute:'2-digit', second:'2-digit', hour12:false });
+}
+updateClock();
+setInterval(updateClock, 1000);
+
+const filterInput = document.getElementById('filterInput');
+const visibleCountEl = document.getElementById('visibleCount');
+
+function applyFilter(){
+  const q = filterInput.value.trim().toLowerCase();
+  let visible = 0;
+
+  document.querySelectorAll('section.column').forEach(section => {
+    const items = section.querySelectorAll('ul.klist li');
+    let sectionVisible = 0;
+    items.forEach(li => {
+      const match = !q || li.dataset.keyword.includes(q);
+      li.classList.toggle('hidden', !match);
+      if(match){ sectionVisible++; visible++; }
+    });
+    section.querySelector('.empty-msg').style.display = (sectionVisible === 0) ? 'block' : 'none';
+    section.style.display = (sectionVisible === 0 && q) ? 'none' : 'flex';
+  });
+
+  visibleCountEl.textContent = q ? `${visible} / ${totalKeywords}개 표시` : '';
+}
+
+filterInput.addEventListener('input', applyFilter);
+</script>
+
+</body>
+</html>
