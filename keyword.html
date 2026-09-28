@@ -207,14 +207,17 @@
 
 <main id="columns"></main>
 
-<footer>클릭 시 Google 뉴스 검색 결과가 새 탭에서 열립니다 · 한국어 키워드는 KR 판, 영문 키워드는 US 판으로 검색됩니다</footer>
+<footer>
+    <a href="index.html">신문가게로 이동하기</a>
+클릭 시 Google 뉴스 검색 결과가 새 탭에서 열립니다 · 한국어 키워드는 KR 판, 영문 키워드는 US 판으로 검색됩니다
+</footer>
 
 <script>
 const DATA = {
-  "기업 키워드": { lang: "ko", keywords: ["공개매수","인적분할","물적분할","합병","매각","유상증자","홈플러스","보스턴다이나믹스","현대엔지니어링","중앙홀딩스","사모펀드 IMM","사모펀드 MBK","한앤컴퍼니"] },
-  "경제/산업 키워드": { lang: "ko", keywords: ["인공지능","데이터센터","원자력","자율주행","스테이블코인","HBM","메모리 반도체","액추에이터","해상풍력","소비자물가","생산자물가","관세","한국은행","산업은행","월 수출","공시지가"] },
-  "일반 키워드": { lang: "ko", keywords: ["광주공항","대구공항","새만금","횡령","배임","별세","부고"] },
-  "Keyword": { lang: "en", keywords: ["strait hormuz","red sea","black sea","suez canal","panama canal","strait malacca"] }
+  "기업 키워드": { lang: "ko", keywords: ["공개매수","인적분할","물적분할","합병","매각","유상증자","횡령","배임"] },
+  "경제/산업 키워드": { lang: "ko", keywords: ["데이터센터","원자력","자율주행","메모리","액추에이터","해상풍력","한국은행","산업은행"] },
+  "일반 키워드": { lang: "ko", keywords: ["광주공항","대구공항","별세","부고"] },
+  "Keyword": { lang: "en", keywords: ["strait hormuz","red sea","suez canal"] }
 };
 
 function buildUrl(keyword, lang){
