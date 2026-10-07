@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>유튜브채널 – 분야별 영상 채널 모음</title>
+<style>
+:root{--bg:#f3f6f4;--ink:#16211d;--mute:#5d6b65;--card:#fff;--line:#d6dfda;--accent:#0f7b6c;--accent2:#e8f3f0;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#101715;--ink:#e6efeb;--mute:#97a8a1;--card:#18221f;--line:#2b3a35;--accent:#4cc9b4;--accent2:#1c2e2a}}
+:root[data-theme="dark"]{--bg:#101715;--ink:#e6efeb;--mute:#97a8a1;--card:#18221f;--line:#2b3a35;--accent:#4cc9b4;--accent2:#1c2e2a}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Pretendard","Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",sans-serif;line-height:1.6}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+header{padding:56px 0 28px}
+h1{font-size:clamp(2rem,6vw,3.4rem);line-height:1.15;margin:0 0 12px;letter-spacing:-.03em;font-weight:800}
+header p{margin:0;color:var(--mute);max-width:46ch;font-size:1.05rem}
+.tools{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);padding:12px 0;border-bottom:1px solid var(--line)}
+input{width:100%;padding:12px 16px;font:inherit;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--ink)}
+input:focus,button:focus-visible,a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.tabs{display:flex;gap:8px;overflow-x:auto;padding:12px 0 2px}
+.tabs button{flex:none;font:inherit;font-size:.92rem;padding:6px 14px;border:1px solid var(--line);border-radius:99px;background:var(--card);color:var(--ink);cursor:pointer}
+.tabs button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+main{padding:12px 0 56px}
+section{margin-top:36px}
+h2{font-size:1.35rem;margin:0 0 4px;letter-spacing:-.02em}
+.desc{margin:0 0 14px;color:var(--mute);font-size:.95rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px}
+.card{display:block;text-decoration:none;color:inherit;background:var(--card);border:1px solid var(--line);border-radius:8px;padding:14px 16px;transition:border-color .15s}
+.card:hover{border-color:var(--accent)}
+.card b{display:block;font-size:1rem}
+.card span{display:block;color:var(--mute);font-size:.88rem;margin-top:2px}
+.empty{color:var(--mute);padding:40px 0;text-align:center}
+footer{border-top:1px solid var(--line);padding:24px 0 40px;color:var(--mute);font-size:.88rem}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+<h1>유튜브채널</h1>
+<p>경제, 시사, 지역소식, 문화예술 중에서 분야를 고르면 영상 채널이 나옵니다. 채널을 누르면 유튜브 검색 결과로 이동합니다.</p>
+</header>
+<div class="tools">
+<input id="q" type="search" placeholder="채널 이름이나 설명으로 검색" aria-label="채널 검색">
+<div class="tabs" id="tabs" role="group" aria-label="분야 선택"></div>
+</div>
+<main id="list"></main>
+<footer>목록은 예시이며 계속 추가할 수 있습니다. 채널 정보는 각 플랫폼에서 직접 확인하세요.</footer>
+</div>
+<script>
+var DATA=[
+
+{n:"경제",d:"경제 뉴스, 부동산, 증권시장을 다루는 채널",c:[["땅집고","부동산 현장취재"],["알상무","금융시장 전망"]]},
+
+{n:"시사",d:"뉴스와 이슈 분석을 전하는 채널",c:[["매일신문방송","한국보수"],["펜앤마이크","한국극우보수"],["그라운드씨","한국보수, 괴변주의"],["강혜신","미국 극좌리버럴"],["원용석","미국 마가보수"],["마이클심","미국극우마가보수"],["NNP뉴스","미국극우마가보수, 가짜뉴스유의"]]},
+
+{n:"지역정보",d:"한국, 일본, 미국",c:[["박가네","일본 이슈"]]},
+
+{n:"문화예술",d:"미술전시, 공연, 클래식, 건축, BGM 이야기",c:[["국립현대미술관","전시와 작가 이야기"],["리움미술관","소장품과 기획전 영상"],["한경Arte","문화예술 채널"],["Lofi Girl","공부·작업용 로파이 라이브 BGM"],["Chillhop Music","로파이 힙합 BGM"],["Cafe Music BGM channel","카페·재즈 BGM 플레이리스트"],["The Jazz Hop Café","재즈 힙합 BGM"]]}
+
+];
+var sel="전체",$l=document.getElementById("list"),$t=document.getElementById("tabs"),$q=document.getElementById("q");
+function tabs(){$t.innerHTML="";["전체"].concat(DATA.map(function(x){return x.n})).forEach(function(n){var b=document.createElement("button");b.textContent=n;b.setAttribute("aria-pressed",n===sel);b.onclick=function(){sel=n;tabs();render()};$t.appendChild(b)})}
+function esc(s){return s.replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+function render(){var k=$q.value.trim().toLowerCase(),h="";
+DATA.forEach(function(g){if(sel!=="전체"&&sel!==g.n)return;
+var items=g.c.filter(function(c){return !k||(c[0]+c[1]+g.n).toLowerCase().indexOf(k)>-1});
+if(!items.length)return;
+h+='<section><h2>'+g.n+'</h2><p class="desc">'+g.d+'</p><div class="grid">'+items.map(function(c){return'<a class="card" target="_blank" rel="noopener" href="https://www.youtube.com/results?search_query='+encodeURIComponent(c[0])+'"><b>'+esc(c[0])+'</b><span>'+esc(c[1])+'</span></a>'}).join("")+'</div></section>'});
+$l.innerHTML=h||'<p class="empty">검색 결과가 없습니다. 다른 이름이나 분야로 찾아보세요.</p>'}
+$q.oninput=render;tabs();render();
+</script>
+</body>
+</html>
